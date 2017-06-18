@@ -204,6 +204,9 @@
 <p>Type A的Value里填的是IP地址，绑定Githug的话，需要填<code>192.30.252.153</code>。<br>Type CNAME里的填是是域名，绑定Githug Pages，填的格式是<code>username.github.io</code>，对应每个人的<code>username</code>。<br><img src="/Users/yuanliao/Desktop/Screen Shot 2017-06-18 at 12.25.44.png" alt=""></p>
 </blockquote>
 <p>设置好后，我们可以在终端里检验一下。根据github的方法，使用<code>$ dig www.xxxx.com + nostats + nocomments +nocmd</code>命令。<br><img src="/Users/yuanliao/Desktop/Screen Shot 2017-06-18 at 12.29.17.png" alt=""><br>下图是我终端里的显示<br><img src="/Users/yuanliao/Desktop/Screen Shot 2017-06-18 at 12.28.56.png" alt=""><br>到现在，个人域名和Github Pages就绑定好了。</p>
+<blockquote>
+<p>建议在blog目录下的public目录先创建CNAME文件，因为我每次deploy后(把文件push到github里，master分支里的CNAME就没掉了)。我是这样做的，不知道有没有其它的方法。</p>
+</blockquote>
 <h2 id="5-继续配置Hexo"><a href="#5-继续配置Hexo" class="headerlink" title="5.继续配置Hexo"></a>5.继续配置Hexo</h2><p>剩下的步骤，就是配置Hexo，好让Hexo可以把文件push到git中，实现网页的更新。<br>还记得我们之前，在下载Hexo的部分中，创建了一个名叫 blog的文件夹吗？在这个文件夹里，有一个<code>_config.yml</code>的文件</p>
 <blockquote>
 <p>注：在blog的子文件夹themes里，也有_config.yml的文件，不过这个文件是配置主题的。这里我们需要配置的是blog根目录里的_config.yml。</p>
