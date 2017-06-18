@@ -10,8 +10,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
-<link rel="stylesheet" href="style/style.css">
-<script src="script/jquery.min.js"></script>
+<link rel="stylesheet" href="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/style/style.css">
+<script src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/script/jquery.min.js"></script>
 <script>
     var CONFIG = {
         title: "Record My Life",
@@ -23,12 +23,12 @@
 
 
 
-    <link rel="stylesheet" href="lightbox/css/lightbox.min.css">
+    <link rel="stylesheet" href="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/lightbox/css/lightbox.min.css">
 
 
 
 
-    <link rel="stylesheet" href="syuanpi/syuanpi.min.css">
+    <link rel="stylesheet" href="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/syuanpi/syuanpi.min.css">
 
 
 
@@ -77,7 +77,7 @@
         
         
             <li class="menu-item">
-                <a href="index.html">
+                <a href="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/">
                     <span>Article</span>
                     
                     
@@ -87,7 +87,7 @@
         
         
             <li class="menu-item">
-                <a href="/archives">
+                <a href="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/archives">
                     <span>Archives</span>
                     
                     
@@ -107,7 +107,7 @@
         
         
             <li class="menu-item">
-                <a href="/about">
+                <a href="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/about">
                     <span>About</span>
                     
                     
@@ -136,7 +136,7 @@
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                <a href="2017/06/18/Mac博客环境搭建Hexo-Github/"></a>
+                <a href="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/2017/06/18/Mac博客环境搭建Hexo-Github/"></a>
             
             </h1>
             
@@ -153,7 +153,7 @@
 <li>接着把个人域名和Github Pages绑定</li>
 <li>最后把Hexo配置下</li>
 </ul>
-<h2 id="1-创建username-github-io"><a href="#1-创建username-github-io" class="headerlink" title="1. 创建username.github.io"></a>1. 创建<code>username.github.io</code></h2><p>在github上拥有一个账户后，创建一个新的Respository。如果这个Respository命名为自己github的用户名，github会自动创建github page。<br><img src="//yuanLIAO/yuanLIAO/2017/06/18/Mac博客环境搭建Hexo-Github/1.png" alt=""></p>
+<h2 id="1-创建username-github-io"><a href="#1-创建username-github-io" class="headerlink" title="1. 创建username.github.io"></a>1. 创建<code>username.github.io</code></h2><p>在github上拥有一个账户后，创建一个新的Respository。如果这个Respository命名为自己github的用户名，github会自动创建github page。<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/2017/06/18/Mac博客环境搭建Hexo-Github/1.png" alt=""></p>
 <blockquote>
 <p>Github规定每个账户只能存在一个对应用户名的Github Pages。</p>
 </blockquote>
@@ -194,23 +194,23 @@
 <p>以下以godaddy的购买域名和配置界面为例子。godaddy官网:<a href="https://www.godaddy.com" target="_blank" rel="external">https://www.godaddy.com</a>  个人觉得，他的域名挺霸气的。。。</p>
 <h4 id="买域名的步骤："><a href="#买域名的步骤：" class="headerlink" title="买域名的步骤："></a>买域名的步骤：</h4><p>注册账号 -&gt; 搜索想买的域名 -&gt; google或者百度 godaddy 优惠码 😏 -&gt; 根据需要选择域名的年限，和配套服务(我买了5年的，其它的配套服务都没买…加了十几欧元的税-_-, 用了个折扣，最后还是58.75欧…)</p>
 <p>付完钱，邮箱确认后，就正式有一个自己的个人域名了。现在输入域名，会发现，什么都没有…</p>
-<h2 id="4-把个人域名和Githu-b-Pages绑定"><a href="#4-把个人域名和Githu-b-Pages绑定" class="headerlink" title="4. 把个人域名和Githu b Pages绑定"></a>4. 把个人域名和Githu b Pages绑定</h2><p>买好个人域名后，现在我们回到Github。<br>先贴一张成功绑定后的图:<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/source/_posts/Mac博客环境搭建Hexo-Github/3.png" alt=""></p>
+<h2 id="4-把个人域名和Githu-b-Pages绑定"><a href="#4-把个人域名和Githu-b-Pages绑定" class="headerlink" title="4. 把个人域名和Githu b Pages绑定"></a>4. 把个人域名和Githu b Pages绑定</h2><p>买好个人域名后，现在我们回到Github。<br>先贴一张成功绑定后的图:<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/2017/06/18/Mac博客环境搭建Hexo-Github/3.png" alt=""></p>
 <blockquote>
 <p>我们要注意到的是，我绑定的网站默认建立在master分支。</p>
 </blockquote>
 <ul>
-<li>首先，在这个<code>username.github.io</code>的Respository的master branch的根目录下(直接转到branch分支，然后新建一个命名为CNAME的文件)<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/source/_posts/Mac博客环境搭建Hexo-Github/4.png" alt=""><br>然后输入域名，注意没有http/https和www前缀<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/source/_posts/Mac博客环境搭建Hexo-Github/5.png" alt=""><br>保存后，回到setting，应该可以看到在Custom domain这一栏里，自动添加了CNAME里的内容。</li>
-<li>下一步，我们要回到godaddy个个人页面。我们将要设置DNS，即域名解析。现在的godaddy的用户界面改了，变成扁平式的了…找到My Products -&gt; Domains -&gt; DNS<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/source/_posts/Mac博客环境搭建Hexo-Github/6.png" alt=""><br>我点进DNS后，发现已经有默认的A类型和CNAME类型的了。所以我是直接修改的。</li>
+<li>首先，在这个<code>username.github.io</code>的Respository的master branch的根目录下(直接转到branch分支，然后新建一个命名为CNAME的文件)<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/2017/06/18/Mac博客环境搭建Hexo-Github/4.png" alt=""><br>然后输入域名，注意没有http/https和www前缀<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/2017/06/18/Mac博客环境搭建Hexo-Github/5.png" alt=""><br>保存后，回到setting，应该可以看到在Custom domain这一栏里，自动添加了CNAME里的内容。</li>
+<li>下一步，我们要回到godaddy个个人页面。我们将要设置DNS，即域名解析。现在的godaddy的用户界面改了，变成扁平式的了…找到My Products -&gt; Domains -&gt; DNS<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/2017/06/18/Mac博客环境搭建Hexo-Github/6.png" alt=""><br>我点进DNS后，发现已经有默认的A类型和CNAME类型的了。所以我是直接修改的。</li>
 </ul>
 <blockquote>
-<p>Type A的Value里填的是IP地址，绑定Githug的话，需要填<code>192.30.252.153</code>。<br>Type CNAME里的填是是域名，绑定Githug Pages，填的格式是<code>username.github.io</code>，对应每个人的<code>username</code>。<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/source/_posts/Mac博客环境搭建Hexo-Github/8.png" alt=""></p>
+<p>Type A的Value里填的是IP地址，绑定Githug的话，需要填<code>192.30.252.153</code>。<br>Type CNAME里的填是是域名，绑定Githug Pages，填的格式是<code>username.github.io</code>，对应每个人的<code>username</code>。<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/2017/06/18/Mac博客环境搭建Hexo-Github/8.png" alt=""></p>
 </blockquote>
-<p>设置好后，我们可以在终端里检验一下。根据github的方法，使用<code>$ dig www.xxxx.com + nostats + nocomments +nocmd</code>命令。<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/source/_posts/Mac博客环境搭建Hexo-Github/10.png" alt=""><br>下图是我终端里的显示<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/source/_posts/Mac博客环境搭建Hexo-Github/9.png" alt=""><br>到现在，个人域名和Github Pages就绑定好了。</p>
+<p>设置好后，我们可以在终端里检验一下。根据github的方法，使用<code>$ dig www.xxxx.com + nostats + nocomments +nocmd</code>命令。<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/2017/06/18/Mac博客环境搭建Hexo-Github/10.png" alt=""><br>下图是我终端里的显示<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/2017/06/18/Mac博客环境搭建Hexo-Github/9.png" alt=""><br>到现在，个人域名和Github Pages就绑定好了。</p>
 <h2 id="5-继续配置Hexo"><a href="#5-继续配置Hexo" class="headerlink" title="5.继续配置Hexo"></a>5.继续配置Hexo</h2><p>剩下的步骤，就是配置Hexo，好让Hexo可以把文件push到git中，实现网页的更新。<br>还记得我们之前，在下载Hexo的部分中，创建了一个名叫 blog的文件夹吗？在这个文件夹里，有一个<code>_config.yml</code>的文件</p>
 <blockquote>
 <p>注：在blog的子文件夹themes里，也有_config.yml的文件，不过这个文件是配置主题的。这里我们需要配置的是blog根目录里的_config.yml。</p>
 </blockquote>
-<p>打开_config.yml文件，拉到最下面找到deploy(或者 command + F，输入deply)，<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/source/_posts/Mac博客环境搭建Hexo-Github/11.png" alt=""><br>保存。<br>然后，为了让Hexo支持Deployer的git,我们还需要装一个东西。在终端输入:<br><code>$ npm install hexo-deployer-git --save</code><br>到现在，基本的环境就已经配置好了。<br>以后，</p>
+<p>打开_config.yml文件，拉到最下面找到deploy(或者 command + F，输入deply)，<br><img src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/2017/06/18/Mac博客环境搭建Hexo-Github/11.png" alt=""><br>保存。<br>然后，为了让Hexo支持Deployer的git,我们还需要装一个东西。在终端输入:<br><code>$ npm install hexo-deployer-git --save</code><br>到现在，基本的环境就已经配置好了。<br>以后，</p>
 <ul>
 <li>我们用 <code>$ hexo new &quot;xxx&quot;</code>来新建一个网页</li>
 <li>用<code>$ hexo generate</code>来生成相应的网页文件</li>
@@ -242,7 +242,7 @@
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                <a href="2017/06/18/环境搭建Hexo&Github/"></a>
+                <a href="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/2017/06/18/环境搭建Hexo&Github/"></a>
             
             </h1>
             
@@ -350,7 +350,7 @@
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                <a href="2017/06/17/My-new-Post/">My new Post</a>
+                <a href="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/2017/06/17/My-new-Post/">My new Post</a>
             
             </h1>
             
@@ -376,7 +376,7 @@
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                <a href="2017/06/17/hello-world/">Hello World</a>
+                <a href="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/2017/06/17/hello-world/">Hello World</a>
             
             </h1>
             
@@ -450,10 +450,10 @@
     </div>
 </footer>
     </div>
-    <script src="script/nlvi.js"></script>
-<script src="script/search.js"></script>
+    <script src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/script/nlvi.js"></script>
+<script src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/script/search.js"></script>
 
-    <script src="lightbox/js/lightbox.min.js"></script>
+    <script src="/Users/yuanliao/Documents/Pro/Blog/My/Hexo/lightbox/js/lightbox.min.js"></script>
 
 <script>
 $(document).ready(function(){
