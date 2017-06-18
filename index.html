@@ -153,86 +153,15 @@
 <li>下载Hexo(需要有Node.js)</li>
 <li>然后买了一个个人顶级域名</li>
 <li>接着把个人域名和Github Pages绑定</li>
-<li>最后把Hexo配置下</li>
-</ul>
-<h2 id="1-创建username-github-io"><a href="#1-创建username-github-io" class="headerlink" title="1. 创建username.github.io"></a>1. 创建<code>username.github.io</code></h2><p>在github上拥有一个账户后，创建一个新的Respository。如果这个Respository命名为自己github的用户名，github会自动创建github page。<br><img src="/2017/06/18/Mac博客环境搭建Hexo-Github/1.png" alt=""></p>
-<blockquote>
-<p>Github规定每个账户只能存在一个对应用户名的Github Pages。</p>
-</blockquote>
-<p>而后，在这个<code>username.github.io</code>的Respository的setting界面中，有关于Github Pages的配置。里面主要关注两个，</p>
-<ul>
-<li>Source: 一定是master分支或者是gh-pages分支。我的是直接就默认master分支了，并且不能更改了。这意味着，以后写的博客要push到github的时候，需要push到master分支中。</li>
-<li>Custom domain: 这个选择可以不动，但是如果想用自己的个人域名，就需要更改。否则就使用<code>github.io</code>后缀的域名。</li>
-</ul>
-<blockquote>
-<p>关于Github，这篇博客后面还会涉及到…</p>
-</blockquote>
-<h2 id="2-下载Hexo"><a href="#2-下载Hexo" class="headerlink" title="2. 下载Hexo"></a>2. 下载Hexo</h2><p>因为我是用brew指令下载的node.js，所以在我的Mac中，我是这样安装Hexo的：</p>
-<blockquote>
-<p>我的Mac环境里已经安装好Xcode（装好Xcode，默认装好了python）</p>
-<blockquote>
-<p>接着我也已经安装好了Homebrew这个套件管理器。具体安装请见Homebrew官网：<a href="https://brew.sh/" target="_blank" rel="external">https://brew.sh/</a> 很快很方便。 </p>
-<blockquote>
-<p>打开终端，输入命令</p>
-<p><code>$ brew install node</code></p>
-<p>然后可以用命令<code>$ node -v</code>来查看一下node.js的版本号</p>
-<blockquote>
-<p>接着，就可以安装Hexo了。Hexo官网：<a href="https://hexo.io" target="_blank" rel="external">https://hexo.io</a></p>
-<p><code>$ npm install hexo-cli -g</code></p>
-<blockquote>
-<p>安装好后，需要初始化Hexo。<br>1.在某个路径中，创建一个文件夹，可以命名为 blog,然后用命令<code>$ hexo init blog</code><br>2.在终端中跳转到刚才创建的文件夹路径中（在mac中，可以直接把文件夹拖到终端中，就可以得到完整的路径）。使用命令<code>$ cd .....</code> 例如 <code>$ cd /User/....../blog</code></p>
-<ol>
-<li>然后用指令<code>$ npm install</code>, 最后输入<code>$ hexo server</code>，就可以在本地服务器<code>localhost:4000</code>里预览创建的静态网页。</li>
-</ol>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>Ps：还有其他的博客框架，如github自己的jekyll(基于ruby)，还有新出的Hugo(基于Go)。因为还是新手，随趋势选了Hexo。各个框架的具体性能和用户体验，还不知道…</p>
-<h2 id="3-买一个个人域名"><a href="#3-买一个个人域名" class="headerlink" title="3. 买一个个人域名"></a>3. 买一个个人域名</h2><blockquote>
-<p>因为我现在在法国，我是在GoDaddy买的。国内可以买阿里云。</p>
-</blockquote>
-<p>以下以godaddy的购买域名和配置界面为例子。godaddy官网:<a href="https://www.godaddy.com" target="_blank" rel="external">https://www.godaddy.com</a>  个人觉得，他的域名挺霸气的。。。</p>
-<h4 id="买域名的步骤："><a href="#买域名的步骤：" class="headerlink" title="买域名的步骤："></a>买域名的步骤：</h4><p>注册账号 -&gt; 搜索想买的域名 -&gt; google或者百度 godaddy 优惠码 😏 -&gt; 根据需要选择域名的年限，和配套服务(我买了5年的，其它的配套服务都没买…加了十几欧元的税-_-, 用了个折扣，最后还是58.75欧…)</p>
-<p>付完钱，邮箱确认后，就正式有一个自己的个人域名了。现在输入域名，会发现，什么都没有…</p>
-<h2 id="4-把个人域名和Githu-b-Pages绑定"><a href="#4-把个人域名和Githu-b-Pages绑定" class="headerlink" title="4. 把个人域名和Githu b Pages绑定"></a>4. 把个人域名和Githu b Pages绑定</h2><p>买好个人域名后，现在我们回到Github。<br>先贴一张成功绑定后的图:<br><img src="/2017/06/18/Mac博客环境搭建Hexo-Github/3.png" alt=""></p>
-<blockquote>
-<p>我们要注意到的是，我绑定的网站默认建立在master分支。</p>
-</blockquote>
-<ul>
-<li>首先，在这个<code>username.github.io</code>的Respository的master branch的根目录下(直接转到branch分支，然后新建一个命名为CNAME的文件)<br><img src="/2017/06/18/Mac博客环境搭建Hexo-Github/4.png" alt=""><br>然后输入域名，注意没有http/https和www前缀<br><img src="/2017/06/18/Mac博客环境搭建Hexo-Github/5.png" alt=""><br>保存后，回到setting，应该可以看到在Custom domain这一栏里，自动添加了CNAME里的内容。</li>
-<li>下一步，我们要回到godaddy个个人页面。我们将要设置DNS，即域名解析。现在的godaddy的用户界面改了，变成扁平式的了…找到My Products -&gt; Domains -&gt; DNS<br><img src="/2017/06/18/Mac博客环境搭建Hexo-Github/6.png" alt=""><br>我点进DNS后，发现已经有默认的A类型和CNAME类型的了。所以我是直接修改的。</li>
-</ul>
-<blockquote>
-<p>Type A的Value里填的是IP地址，绑定Githug的话，需要填<code>192.30.252.153</code>。<br>Type CNAME里的填是是域名，绑定Githug Pages，填的格式是<code>username.github.io</code>，对应每个人的<code>username</code>。<br><img src="/2017/06/18/Mac博客环境搭建Hexo-Github/8.png" alt=""></p>
-</blockquote>
-<p>设置好后，我们可以在终端里检验一下。根据github的方法，使用<code>$ dig www.xxxx.com + nostats + nocomments +nocmd</code>命令。<br><img src="/2017/06/18/Mac博客环境搭建Hexo-Github/10.png" alt=""><br>下图是我终端里的显示<br><img src="/2017/06/18/Mac博客环境搭建Hexo-Github/9.png" alt=""><br>到现在，个人域名和Github Pages就绑定好了。</p>
-<h2 id="5-继续配置Hexo"><a href="#5-继续配置Hexo" class="headerlink" title="5.继续配置Hexo"></a>5.继续配置Hexo</h2><p>剩下的步骤，就是配置Hexo，好让Hexo可以把文件push到git中，实现网页的更新。<br>还记得我们之前，在下载Hexo的部分中，创建了一个名叫 blog的文件夹吗？在这个文件夹里，有一个<code>_config.yml</code>的文件</p>
-<blockquote>
-<p>注：在blog的子文件夹themes里，也有_config.yml的文件，不过这个文件是配置主题的。这里我们需要配置的是blog根目录里的_config.yml。</p>
-</blockquote>
-<p>打开_config.yml文件，拉到最下面找到deploy(或者 command + F，输入deply)，<br><img src="/2017/06/18/Mac博客环境搭建Hexo-Github/11.png" alt=""><br>保存。<br>然后，为了让Hexo支持Deployer的git,我们还需要装一个东西。在终端输入:<br><code>$ npm install hexo-deployer-git --save</code><br>后面在博客中添加图片的时候，因为路径问题，在markdown，hexo还有github远程服务器中，几个地方的路径的差异，使得加入从本地添加图片到博客然后上传到远程比较麻烦。但我们也有办法解决。</p>
-<blockquote>
-<p>首先，我们在跟目录下的<code>_config.yml</code>文件中，修改<br><img src="/2017/06/18/Mac博客环境搭建Hexo-Github/12.png" alt=""><br>并且找到<code>post_asset_folder</code>，更改为<code>true</code><br>接着我们安装一个插件，<a href="https://github.com/CodeFalling/hexo-asset-image" target="_blank" rel="external">https://github.com/CodeFalling/hexo-asset-image</a><br>当我们用<code>$ hexo new &quot;xxx&quot;</code>命令创建一个文件时，在<code>blog/source/_posts</code>目录下，会自动生成同样名字的文件夹，假设为example1文件夹(这个文件夹的路径为……/blog/source/_posts/example)。如果我们要在博客中添加图片，把本地的图片放到example1文件夹中。在写博客时，添加图片的格式是<code>[](example1/1.png)</code></p>
-</blockquote>
-<p>到现在，基本的环境就已经配置好了。<br>以后，</p>
-<ul>
-<li>我们用 <code>$ hexo new &quot;xxx&quot;</code>来新建一个网页</li>
-<li>用<code>$ hexo generate</code>来生成相应的网页文件</li>
-<li>用<code>$ hexo deploy</code>把生成的文件push到github对应的远程分支里。<br>接着我们就可以在浏览器里，输入我们个人域名，看我们自己的博客（网页）。<blockquote>
-<p>我们可以用<code>$ hexo s</code>命令启动hexo，然后在本地服务器<code>localhost:4000</code>预览网页。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="6-补充"><a href="#6-补充" class="headerlink" title="6. 补充"></a>6. 补充</h2><p>整的来说，我是在Mac上，以Hexo + Github Pages然后使用自己买的个人域名搭建的博客。然后我是用Macdown的编译器来写文章(写好后把.md格式的文件拷贝到blog文件夹下的<code>source/_postes/</code>路径下)</p>
-<blockquote>
-<p>注：关于写文章的编译器，有许多选择，以Mac为例，有Mou、Macdown、Typora、Sublime Text 3、Atom… 具体哪个，请根据个人爱好进行选择😏</p>
-</blockquote>
-<p>最后，吃饭时间到了。。。</p>
-
-                
+<li>最后把Hexo配置下</li></ul>
+                    
             
+        
+            <p class="content-link">
+                <a href="/2017/06/18/Mac博客环境搭建Hexo-Github/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
         
         </div>
         
