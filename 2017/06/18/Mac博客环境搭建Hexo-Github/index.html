@@ -206,7 +206,11 @@
 <blockquote>
 <p>注：在blog的子文件夹themes里，也有_config.yml的文件，不过这个文件是配置主题的。这里我们需要配置的是blog根目录里的_config.yml。</p>
 </blockquote>
-<p>打开_config.yml文件，拉到最下面找到deploy(或者 command + F，输入deply)，<br><img src="/2017/06/18/Mac博客环境搭建Hexo-Github/11.png" alt=""><br>保存。<br>然后，为了让Hexo支持Deployer的git,我们还需要装一个东西。在终端输入:<br><code>$ npm install hexo-deployer-git --save</code><br>到现在，基本的环境就已经配置好了。<br>以后，</p>
+<p>打开_config.yml文件，拉到最下面找到deploy(或者 command + F，输入deply)，<br><img src="/2017/06/18/Mac博客环境搭建Hexo-Github/11.png" alt=""><br>保存。<br>然后，为了让Hexo支持Deployer的git,我们还需要装一个东西。在终端输入:<br><code>$ npm install hexo-deployer-git --save</code><br>后面在博客中添加图片的时候，因为路径问题，在markdown，hexo还有github远程服务器中，几个地方的路径的差异，使得加入从本地添加图片到博客然后上传到远程比较麻烦。但我们也有办法解决。</p>
+<blockquote>
+<p>首先，我们在跟目录下的<code>_config.yml</code>文件中，修改<br><img src="/2017/06/18/Mac博客环境搭建Hexo-Github/12.png" alt=""><br>并且找到<code>post_asset_folder</code>，更改为<code>true</code><br>接着我们安装一个插件，<a href="https://github.com/CodeFalling/hexo-asset-image" target="_blank" rel="external">https://github.com/CodeFalling/hexo-asset-image</a><br>当我们用<code>$ hexo new &quot;xxx&quot;</code>命令创建一个文件时，在<code>blog/source/_posts</code>目录下，会自动生成同样名字的文件夹，假设为example1文件夹(这个文件夹的路径为……/blog/source/_posts/example)。如果我们要在博客中添加图片，把本地的图片放到example1文件夹中。在写博客时，添加图片的格式是<code>[](example1/1.png)</code></p>
+</blockquote>
+<p>到现在，基本的环境就已经配置好了。<br>以后，</p>
 <ul>
 <li>我们用 <code>$ hexo new &quot;xxx&quot;</code>来新建一个网页</li>
 <li>用<code>$ hexo generate</code>来生成相应的网页文件</li>
@@ -234,9 +238,9 @@
     <nav class="article-page">
         
         
-            <a href="/2017/06/18/环境搭建Hexo&Github/" id="art-right" class="art-left">
+            <a href="/2017/06/17/hello-world/" id="art-right" class="art-left">
                 <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>
+                    <i class="iconfont icon-left"></i>Hello World
                 </span>
             </a>
         
