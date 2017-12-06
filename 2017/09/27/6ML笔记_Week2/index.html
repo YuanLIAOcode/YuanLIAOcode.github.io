@@ -101,12 +101,12 @@
 <meta property="og:site_name" content="Record My Life">
 <meta property="og:description" content="Gradient DescentGradient Descent in Practice — Feature ScalingTo speed up gradient descent, two techniques to help with this are feature scaling and mean normalization.   Feature scaling involves divi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="//yuanliaocode.github.io/2017/09/27/6ML笔记_Week2/Netrual_Network.png">
-<meta property="og:updated_time" content="2017-12-06T20:33:49.000Z">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/27/6ML笔记_Week2/Normal_Equation.png">
+<meta property="og:updated_time" content="2017-12-06T20:46:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cousera Ng Adrew Machine Learning_Note week2">
 <meta name="twitter:description" content="Gradient DescentGradient Descent in Practice — Feature ScalingTo speed up gradient descent, two techniques to help with this are feature scaling and mean normalization.   Feature scaling involves divi">
-<meta name="twitter:image" content="//yuanliaocode.github.io/2017/09/27/6ML笔记_Week2/Netrual_Network.png">
+<meta name="twitter:image" content="//yuanliaocode.github.io/2017/09/27/6ML笔记_Week2/Normal_Equation.png">
 
 
 
@@ -338,6 +338,7 @@
 <p><code>Mean nirmalization</code> involves subtracting the average value for an input variable from the values for that input variable resulting in a nwe average value for the input variable of just zero.</p>
 <p>The delta will descend quickly on small ranges and slowly on large ranges.</p>
 </blockquote>
+<a id="more"></a>
 <p>To implement both of these techniques, we can ajust our input values as shown in this formula:</p>
 <p>$x_i := \frac{x_i - u_i}{S_i}$</p>
 <ul>
@@ -352,7 +353,7 @@
 <h2 id="Normal-Equation"><a href="#Normal-Equation" class="headerlink" title="Normal Equation"></a>Normal Equation</h2><blockquote>
 <p>Gradient descent gives one way of minizing J. There is a second way of doing so, this time performing the minizaiton explicitly and without resorting to an iterative algorithm. </p>
 <p>In the ‘Noramal Equation’, method, we will minimize J by explicitly taking its derivatives with respect to the $𝛿_J$ ‘s, and setting them to zero. This allow us to find the optimum theta without iteration. The normal equation formula is given below:</p>
-<p><img src="/2017/09/27/6ML笔记_Week2/Netrual_Network.png" alt="Normal Equation"></p>
+<p><img src="/2017/09/27/6ML笔记_Week2/Normal_Equation.png" alt="Normal Equation"></p>
 </blockquote>
 <ul>
 <li>There is <strong>no need</strong> to do feature scaling with the normal equation.</li>
