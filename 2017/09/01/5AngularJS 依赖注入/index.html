@@ -1,0 +1,733 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="AngularJS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Angular JS 模块的概念和依赖注入分析 部分英文参考: Understanding Dependency Injection部分中文参考：Angualr JS 模块化与依赖注入 Angular JS 使用模块化的组织方式，和依赖注入的设计。这使得模块之间耦合度较低，模块更容易复用，同时支持声明式的编程风格。">
+<meta name="keywords" content="AngularJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AngularJS 依赖注入">
+<meta property="og:url" content="//YuanLIAOcode.github.io/2017/09/01/5AngularJS 依赖注入/index.html">
+<meta property="og:site_name" content="Record My Life">
+<meta property="og:description" content="Angular JS 模块的概念和依赖注入分析 部分英文参考: Understanding Dependency Injection部分中文参考：Angualr JS 模块化与依赖注入 Angular JS 使用模块化的组织方式，和依赖注入的设计。这使得模块之间耦合度较低，模块更容易复用，同时支持声明式的编程风格。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-05T21:59:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AngularJS 依赖注入">
+<meta name="twitter:description" content="Angular JS 模块的概念和依赖注入分析 部分英文参考: Understanding Dependency Injection部分中文参考：Angualr JS 模块化与依赖注入 Angular JS 使用模块化的组织方式，和依赖注入的设计。这使得模块之间耦合度较低，模块更容易复用，同时支持声明式的编程风格。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="//YuanLIAOcode.github.io/2017/09/01/5AngularJS 依赖注入/"/>
+
+
+
+
+
+  <title>AngularJS 依赖注入 | Record My Life</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-102582468-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Record My Life</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="//YuanLIAOcode.github.io/2017/09/01/5AngularJS 依赖注入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuan LIAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Record My Life">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AngularJS 依赖注入</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-01T11:41:12+02:00">
+                2017-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Angular-JS-模块的概念和依赖注入分析"><a href="#Angular-JS-模块的概念和依赖注入分析" class="headerlink" title="Angular JS 模块的概念和依赖注入分析"></a>Angular JS 模块的概念和依赖注入分析</h2><blockquote>
+<p>部分英文参考: <a href="https://github.com/angular/angular.js/wiki/Understanding-Dependency-Injection" target="_blank" rel="noopener">Understanding Dependency Injection</a><br>部分中文参考：<a href="http://harttle.com/2015/06/07/angular-module.html" target="_blank" rel="noopener">Angualr JS 模块化与依赖注入</a></p>
+<p>Angular JS 使用模块化的组织方式，和依赖注入的设计。这使得模块之间耦合度较低，模块更容易复用，同时支持声明式的编程风格。</p>
+</blockquote>
+<a id="more"></a>
+<p>##模块概念<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'(这里声明模块的名字)'</span>, [<span class="string">'(这里列出该模块所依赖的其它模块的名字'</span>, <span class="string">''</span>..])</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Module 依赖： 在声明一个模块时，需要给出依赖模块的列表。同时这些模块对应的JS需要在HTML中加以引入。一个模块中，默认引入了 Service, Directive 和 Filter模块。</p>
+</blockquote>
+<ul>
+<li>区分Module依赖和Service依赖:<br>​    在声明Controller, Service, Directive 和 Filter的工厂方法中，把依赖的Service直接放到参数列表中，Angular 的 <code>$injector</code> 会自动注入生成这些Service。</li>
+</ul>
+<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><p>​    在Angular中， Directive, Service, Filter, Controller都是以工厂法的方式给出，而工厂方法的参数名对应着（与其相同）该工厂方法所依赖的Service。</p>
+<p>​    以Controller为例，有两种声明方式:</p>
+<ol>
+<li><p>不使用字符串数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'aCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $http</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//some code</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p> 在上述的<code>function</code>执行之间，Angualr <code>$injectro</code> 会生成一个 <code>scope</code> 实例和 <code>$http</code> 实例，并传入该方法。如果你希望对JS进行压缩处理，那么参数名称可能会发生变化，Angular的 <code>$injector</code> 则不能正确地把这个控制器所依赖的Service注入</p>
+</li>
+<li><p>使用字符串数组的形式来声明依赖项。(字符串常量不会被压缩) ：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'aCtrl'</span>, [<span class="string">'$scope'</span>, <span class="string">'$http'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $http</span>)</span>&#123;</span><br><span class="line">  <span class="comment">//some code</span></span><br><span class="line">&#125;])</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>另外，还可以同时设置 <code>$injector</code> 来显示地声明所依赖的Service:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> worldCtrl = <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $http</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// some code</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">worldCtrl.$inject = [<span class="string">'$scope'</span>, <span class="string">'http'</span>];</span><br><span class="line">app.controller(<span class="string">'worldCtrl'</span>, worldCtrl);</span><br></pre></td></tr></table></figure></p>
+<p>  <code>constant</code>方法<br>​    </p>
+<p>####注入器($injector)</p>
+<pre><code>注入器负责
+每个Angular JS应用都有唯一一个`$injector`，当应用启动的时就会生成一个，你可以通过将 `$inject` 注入到任何可以注入函数中来得到它 (`$inject` 知道如何注入它自己)
+</code></pre><blockquote>
+<p>我们不能在 <code>constant</code> 和 <code>value</code> 中注入任何东西。因为 <code>constant</code> 和 <code>value</code> 总是返回一个静态值，它们不会被注入器调用。</p>
+</blockquote>
+<p>####控制器($controller)</p>
+<pre><code>控制器可以被注入，但是控制器本身是不能被注入到任何东西里去的。这是因为控制器不是通过Provider创建的。但Angular JS内部有一个` $controller` 服务器，用来负责初始化你的控制器。比如说，当你调用 `myMod.controller(...)` 这个控制器时，其实我们在访问这个服务器的provider。
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AngularJS/" rel="tag"># AngularJS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/02/angularJS部件/" rel="next" title="AngularJS1.x 部件">
+                <i class="fa fa-chevron-left"></i> AngularJS1.x 部件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/27/6ML笔记_Week2/" rel="prev" title="Cousera Ng Adrew Machine Learning_Note week2">
+                Cousera Ng Adrew Machine Learning_Note week2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Yuan LIAO" />
+          <p class="site-author-name" itemprop="name">Yuan LIAO</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Angular-JS-模块的概念和依赖注入分析"><span class="nav-number">1.</span> <span class="nav-text"><a href="#Angular-JS-&#x6A21;&#x5757;&#x7684;&#x6982;&#x5FF5;&#x548C;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x5206;&#x6790;" class="headerlink" title="Angular JS &#x6A21;&#x5757;&#x7684;&#x6982;&#x5FF5;&#x548C;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x5206;&#x6790;"></a>Angular JS &#x6A21;&#x5757;&#x7684;&#x6982;&#x5FF5;&#x548C;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x5206;&#x6790;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖注入"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4F9D;&#x8D56;&#x6CE8;&#x5165;" class="headerlink" title="&#x4F9D;&#x8D56;&#x6CE8;&#x5165;"></a>&#x4F9D;&#x8D56;&#x6CE8;&#x5165;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuan LIAO</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

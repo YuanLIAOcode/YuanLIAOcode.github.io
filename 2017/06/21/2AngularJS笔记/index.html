@@ -1,0 +1,859 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Angular JS 1.x," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. 完整的目录结构dest:放置最终编译后的JSdocs:写的文档 node_modules:node.js里工作 src:源代码 test:测试代码 根据设计图，用bootstrap的编写规则，先写模板代码，然后再去写JS代码">
+<meta name="keywords" content="Angular JS 1.x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular JS 1.x 学习笔记">
+<meta property="og:url" content="//YuanLIAOcode.github.io/2017/06/21/2AngularJS笔记/index.html">
+<meta property="og:site_name" content="Record My Life">
+<meta property="og:description" content="1. 完整的目录结构dest:放置最终编译后的JSdocs:写的文档 node_modules:node.js里工作 src:源代码 test:测试代码 根据设计图，用bootstrap的编写规则，先写模板代码，然后再去写JS代码">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/06/21/2AngularJS笔记/18.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/06/21/2AngularJS笔记/19.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/06/21/2AngularJS笔记/17.png">
+<meta property="og:updated_time" content="2017-07-14T17:35:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular JS 1.x 学习笔记">
+<meta name="twitter:description" content="1. 完整的目录结构dest:放置最终编译后的JSdocs:写的文档 node_modules:node.js里工作 src:源代码 test:测试代码 根据设计图，用bootstrap的编写规则，先写模板代码，然后再去写JS代码">
+<meta name="twitter:image" content="//yuanliaocode.github.io/2017/06/21/2AngularJS笔记/18.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="//YuanLIAOcode.github.io/2017/06/21/2AngularJS笔记/"/>
+
+
+
+
+
+  <title>Angular JS 1.x 学习笔记 | Record My Life</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-102582468-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Record My Life</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="//YuanLIAOcode.github.io/2017/06/21/2AngularJS笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuan LIAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Record My Life">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Angular JS 1.x 学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-21T14:04:48+02:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-完整的目录结构"><a href="#1-完整的目录结构" class="headerlink" title="1. 完整的目录结构"></a>1. 完整的目录结构</h2><p><code>dest:</code>放置最终编译后的JS<br><code>docs:</code>写的文档</p>
+<p><code>node_modules:</code>node.js里工作</p>
+<p><code>src:</code>源代码</p>
+<p><code>test:</code>测试代码</p>
+<p>根据设计图，用bootstrap的编写规则，先写模板代码，然后再去写JS代码</p>
+<a id="more"></a>
+<p>一级目录:</p>
+<ul>
+<li>package.json</li>
+<li>node_nodels: 插件集合，放在工程目录里，便于团队合作，工具统一</li>
+<li>app:<ol>
+<li>放<strong>模板</strong></li>
+<li>js: <code>app.js</code>(作为启动点，相当于C语言里的main函数)，<code>controller.js</code>, <code>directive.js</code>，<code>filters.js</code>，<code>service.js</code></li>
+</ol>
+</li>
+</ul>
+<h2 id="2-忘了是什么内容了。。。。"><a href="#2-忘了是什么内容了。。。。" class="headerlink" title="2. 忘了是什么内容了。。。。"></a>2. 忘了是什么内容了。。。。</h2><p>在模板注入中，注入的模板如果是已ng开头的，则是AngularJS自带的模板<br><code>ng-bind</code> 和双花括号的使用选择: 首页(第一个页面用<code>ng-bing</code>)，后面的页面用双花括号。</p>
+<h2 id="3-Directive-指令"><a href="#3-Directive-指令" class="headerlink" title="3. Directive 指令"></a>3. Directive 指令</h2><p>AngularJS自带的预设指令都有<code>ng-</code>前缀，比如说<code>ng-app</code>。</p>
+<blockquote>
+<p>AngularJS API Document: <a href="https://docs.angularjs.org/api" target="_blank" rel="noopener">https://docs.angularjs.org/api</a></p>
+<p>AngularUI: <a href="https://angular-ui.github.io/" target="_blank" rel="noopener">https://angular-ui.github.io/</a> （一些现成的封装好的指令，可以省去自己写指令的精力）</p>
+</blockquote>
+<p><strong>return的对象中，包含的属性</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">    name: <span class="string">''</span>,</span><br><span class="line">    priority: <span class="number">0</span>,</span><br><span class="line">    terminal: <span class="literal">true</span>,</span><br><span class="line">    restrict: <span class="string">''</span>,</span><br><span class="line">    replace: <span class="string">''</span>,</span><br><span class="line">    transclude: <span class="literal">true</span>, </span><br><span class="line">    scope: &#123;&#125;,</span><br><span class="line">    <span class="built_in">require</span>: fn,</span><br><span class="line">    controller: fn,</span><br><span class="line">    template: <span class="string">''</span>,</span><br><span class="line">    templateUrl: <span class="string">''</span>,</span><br><span class="line">    compile: fn,</span><br><span class="line">    link: fn</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-1-name"><a href="#3-1-name" class="headerlink" title="3.1 name:"></a><strong>3.1 name</strong>:</h3><p>表示当前scope的名称，一般使用默认值。</p>
+<h3 id="3-2-priority"><a href="#3-2-priority" class="headerlink" title="3.2 priority:"></a><strong>3.2 priority</strong>:</h3><p>多个directive在同一个DOM上执行时的优先级。</p>
+<h3 id="3-3-restrict-restrict-39-39"><a href="#3-3-restrict-restrict-39-39" class="headerlink" title="3.3 restrict: restrict: &#39;&#39;**"></a><strong>3.3 restrict:</strong> <code>restrict: &#39;&#39;</code>**</h3><p>四种指令方式:</p>
+<ul>
+<li>“A”: 属性(attribute) eg: <code>&lt;div hello&gt;&lt;div&gt;</code>(默认方式)</li>
+<li>“E”: 元素(element) <code>&lt;hello&gt;&lt;/hello&gt;</code></li>
+<li>“M”: 注释`&lt;!” directive “&gt;</li>
+<li>“C”: CSS样式类 `<div class="hello"></div></li>
+</ul>
+<blockquote>
+<p>推荐使用 属性 和 元素 这两种方式</p>
+</blockquote>
+<h3 id="3-5-transclude-replace-true-fasle（在使用指令可以嵌套内容"><a href="#3-5-transclude-replace-true-fasle（在使用指令可以嵌套内容" class="headerlink" title="3.5 transclude: replace: true/fasle（在使用指令可以嵌套内容)"></a><strong>3.5 transclude: <code>replace: true/fasle</code>（在使用指令可以嵌套内容)</strong></h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hello</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!-- 一些代码 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hello</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果想在指令中，添加一些代码，就需要开启 <code>transclude</code>，使其为<code>true</code>。</p>
+<p>另外一种形式: <code>transclude：&#39;element&#39;</code></p>
+<h4 id="3-5-1-两种形式的比较-transclude-true和transclude-39-element-39"><a href="#3-5-1-两种形式的比较-transclude-true和transclude-39-element-39" class="headerlink" title="3.5.1 两种形式的比较:  transclude: true和transclude: &#39;element&#39;"></a>3.5.1 两种形式的比较:  <code>transclude: true</code>和<code>transclude: &#39;element&#39;</code></h4><p>假定我们有一个directive：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hello</span>&gt;</span>&#123;&#123;who&#125;&#125;<span class="tag">&lt;/<span class="name">hello</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在JS中定义的template是:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-transclue</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Nice to Meet You!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong><code>transclude: true</code></strong>: 在html页面中的效果<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-transclude</span>&gt;</span></span><br><span class="line">    &#123;&#123;who&#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Nice to Meet you!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong><code>transclude: &#39;element&#39;</code></strong>: 在html页面中的效果</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-transclude</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">hello</span>&gt;</span>&#123;&#123;who&#125;&#125;<span class="tag">&lt;/<span class="name">hello</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Nice to Meet you!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：在element模式下，<code>replace: true/false</code>的变化，会导致最后的输出不同。</p>
+</blockquote>
+<h4 id="3-5-2-transclude-函数-还没明白。。。。。。。。。。。！！！"><a href="#3-5-2-transclude-函数-还没明白。。。。。。。。。。。！！！" class="headerlink" title="3.5.2 transclude()函数   ???还没明白。。。。。。。。。。。！！！"></a>3.5.2 transclude()函数   ???还没明白。。。。。。。。。。。！！！</h4><p><strong>transclude和scope</strong></p>
+<p>如果使用transclude，则无论什么情况，都会生成一个新的作用域，这个作用域直接原型继承于父作用域，它的作用域和指令生成的作用域一样，二者属于并列关系</p>
+<ul>
+<li>tra</li>
+</ul>
+<h3 id="3-2-scope-独立scope"><a href="#3-2-scope-独立scope" class="headerlink" title="3.2 scope (独立scope):"></a><em>3.2 scope (独立scope):</em></h3><p><strong>在定义一个指令时，如果不显示声明<code>scope</code>，那么这个指令的作用域就是父作用域。当声明<code>scope: ture</code>或者<code>scope: {}</code>，指令就会生成一个自己的作用域（<code>scope: true</code>是原型继承，<code>scope: {}</code>是独立的作用域）。</strong></p>
+<p>scope绑定策略:<br><img src="/2017/06/21/2AngularJS笔记/18.png" alt="18"></p>
+<ul>
+<li>“@”： 用于绑定字符串，返回一个字符串（也可以指定属性名称，如<code>@attr</code>。如果没有指定属性名，则本地名称将于DOM中的属性名称一致。</li>
+<li>“=”：用于双向绑定。将local scope属性与parent scope进行双向绑定。（如果没有指定attr名称，如<code>=a1</code>,<code>=attr1&#39;</code>，则本地名称将于属性名称一致。</li>
+<li>“&amp;”：用于传递函数， 调用父层作用域上的函数</li>
+</ul>
+<p><img src="/2017/06/21/2AngularJS笔记/19.png" alt="19"></p>
+<blockquote>
+<p>小坑：在scope中定义的属性名称，如果是类似<code>scope: &#39;aTitle&#39;</code>，则在html文件中，便签中属性引用时，应该使用<code>a-title=...</code></p>
+</blockquote>
+<h3 id="3-6-template"><a href="#3-6-template" class="headerlink" title="3.6 template:"></a><strong>3.6 template:</strong></h3><p>如果template是网页的话，可以用cache缓存:</p>
+<p>使用<code>module”.run(function($templateCache){})</code>形式来缓存directive里的template页面。在template中，使用<code>$templateCache.gett(“hello.html”)</code>去除网页</p>
+<h3 id="3-7-templateUrl"><a href="#3-7-templateUrl" class="headerlink" title="3.7 templateUrl:"></a><strong>3.7 templateUrl</strong>:</h3><p>用法和template差不多，不过这里传入的模板是所指定的url加载后得来的。加载模板时异步的，所有compilie和linking的动作会先暂停，等加载完后继续执行  ？？？？？？</p>
+<h3 id="3-8-Controller-controller-function-scope-element-attrs-transclude"><a href="#3-8-Controller-controller-function-scope-element-attrs-transclude" class="headerlink" title="3.8 Controller: controller: function($scope, $element, $attrs, $transclude) { };"></a><em>3.8 Controller</em>: <code>controller: function($scope, $element, $attrs, $transclude) { };</code></h3><p>通过数据注入传入参数（因此参数的名称是固定的），注入的参数：</p>
+<ul>
+<li>$scope: </li>
+<li>$element:</li>
+<li>$attrs:</li>
+<li>$transclude</li>
+</ul>
+<p>controller构造函数，会在pre-linking步骤之前进行初始化，并且controller允许其它directive通过require来指定名称来获取某个controller，并将该controller作为一个对象。</p>
+<h3 id="3-9-require-require-39-hello-39"><a href="#3-9-require-require-39-hello-39" class="headerlink" title="3.9 require: require: &#39;?^hello&#39;"></a><strong>3.9 require: <code>require: &#39;?^hello&#39;</code></strong></h3><p>directive中require的作用是请求其它的controller，并传入房钱directive的linking函数中。require函数需要传入一个directive控制器的名称，如果找不到对应名称的控制器，则会抛出一个error。require有两个前缀可以使用:</p>
+<ul>
+<li>‘?’: 不要抛出异常</li>
+<li>‘^’: 允许查找父控制器。</li>
+</ul>
+<blockquote>
+<p>可以通过require进行依赖外部的指令，从而可以在link中可以接收到第四个参数。通过link中第四个参数，从而可以和外层的指令进行交互(对外层指令中所暴露的方法进行操作)。</p>
+</blockquote>
+<h3 id="3-10-Compile"><a href="#3-10-Compile" class="headerlink" title="3.10 Compile:"></a>3.10 Compile:</h3><h3 id="3-11-link-link-function-scope-element-attrs-ctrl-transclude"><a href="#3-11-link-link-function-scope-element-attrs-ctrl-transclude" class="headerlink" title="3.11 link: link: function(scope, element, attrs, ctrl, transclude){}"></a><em>3.11 link: <code>link: function(scope, element, attrs, ctrl, transclude){}</code></em></h3><blockquote>
+<p>因为link没有依赖注入，function函数中的各个参数的传递只要顺序对了就行，参数名字可以随便取。</p>
+</blockquote>
+<p><img src="/2017/06/21/2AngularJS笔记/17.png" alt="17"></p>
+<ul>
+<li>(JS文件)在directive中，link函数的参数scope中的属性，对应template里的变量。attrs中的属性，对应controller中的变量</li>
+<li>(html文件)如果以属性的方式使用某个directive，则传入directive中某个属性是某个controller的属性(即在link函数中，attrs参数的属性)</li>
+<li>howToload(): 在不同控制器中调用不同的指令</li>
+</ul>
+<blockquote>
+<p>用@比用link更快</p>
+<p>可以使用<code>scope.loadData() 或者scope.$apply()来调用方法</code></p>
+</blockquote>
+<h4 id="controller-link和compile的关系："><a href="#controller-link和compile的关系：" class="headerlink" title="controller, link和compile的关系："></a>controller, link和compile的关系：</h4><p>controller先运行，link和compile同时存在时，compile会覆盖link的内容。</p>
+<h3 id="directive的-内置指令"><a href="#directive的-内置指令" class="headerlink" title="directive的 内置指令"></a><em>directive的 内置指令</em></h3><p><strong>最重要的标签之一是 form</strong></p>
+<h2 id="4-Service-amp-Provider"><a href="#4-Service-amp-Provider" class="headerlink" title="4. Service&amp;Provider"></a>4. Service&amp;Provider</h2><p>在MVC中，不要去复用controller。但是多个controller中有相同代码时，可以把相同的代码抽取出来变成service。</p>
+<h3 id="4-1-HTTP服务"><a href="#4-1-HTTP服务" class="headerlink" title="4.1 HTTP服务"></a><em>4.1 HTTP服务</em></h3><ul>
+<li>timeout: 在向后台发起请求时，防抖动处理</li>
+<li>自定义service: 不能有$前缀。在对angularJS进行注入时，应该放在最后。</li>
+</ul>
+<blockquote>
+<p>Service, Provider，Factory本质都是Provider</p>
+</blockquote>
+<h4 id="4-1-1-Filter"><a href="#4-1-1-Filter" class="headerlink" title="4.1.1 Filter"></a><em>4.1.1 Filter</em></h4><h4 id="4-1-2-其它常用的Service-内置的共24个"><a href="#4-1-2-其它常用的Service-内置的共24个" class="headerlink" title="4.1.2 其它常用的Service: 内置的共24个"></a>4.1.2 其它常用的Service: 内置的共24个</h4><p><strong><em>内置的service，一定要会用</em></strong></p>
+<p><code>$compile:</code>编译服务</p>
+<p><code>$filter:</code>数据格式化工具，内置了8个</p>
+<p><code>$interval:</code></p>
+<p><code>$timeout:</code>定时器</p>
+<p><code>$locale:</code>用于国际化文件</p>
+<p><code>$location:</code></p>
+<p><code>$log:</code></p>
+<p><code>$parse:</code></p>
+<p><code>$http:</code> 封装了Ajax</p>
+<h2 id="其它知识点"><a href="#其它知识点" class="headerlink" title="其它知识点"></a>其它知识点</h2><ul>
+<li>forEach:  <code>angular.forEach(values, function(value, index, array/objs){}, context);</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>values</td>
+<td>需要遍历的集合</td>
+</tr>
+<tr>
+<td>value</td>
+<td>遍历时当前的数据</td>
+</tr>
+<tr>
+<td>key</td>
+<td>遍历时当前索引</td>
+</tr>
+<tr>
+<td>array</td>
+<td>需要遍历的集合，每次遍历时都会把objs原样的传一次</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>index 和 array</code>参数可以不写</p>
+</blockquote>
+<p>返回值：对obj的引用</p>
+<ul>
+<li><p><code>$.scope</code>:</p>
+<p>​        <code>.$watch(&#39; &#39;, function{});</code>: 监控模型的变化</p>
+</li>
+</ul>
+<h1 id="核心原理解析"><a href="#核心原理解析" class="headerlink" title="核心原理解析"></a>核心原理解析</h1><h2 id="1-AngularJS的启动过程分析"><a href="#1-AngularJS的启动过程分析" class="headerlink" title="1. AngularJS的启动过程分析"></a>1. AngularJS的启动过程分析</h2><h2 id="2-依赖注入原理分析：-Povider与Injector"><a href="#2-依赖注入原理分析：-Povider与Injector" class="headerlink" title="2. 依赖注入原理分析： Povider与Injector"></a>2. 依赖注入原理分析： Povider与Injector</h2><h2 id="3-指令的执行过程分析"><a href="#3-指令的执行过程分析" class="headerlink" title="3. 指令的执行过程分析"></a>3. 指令的执行过程分析</h2><h2 id="4-scope与双向数据绑定分析"><a href="#4-scope与双向数据绑定分析" class="headerlink" title="4. $scope与双向数据绑定分析"></a>4. $scope与双向数据绑定分析</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Angular-JS-1-x/" rel="tag"># Angular JS 1.x</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/18/1Mac博客环境搭建Hexo-Github/" rel="next" title="Mac 搭建个人博客：个人域名 + Hexo + Github Pages">
+                <i class="fa fa-chevron-left"></i> Mac 搭建个人博客：个人域名 + Hexo + Github Pages
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/28/4NodeJS笔记/" rel="prev" title="Node.js 学习笔记">
+                Node.js 学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Yuan LIAO" />
+          <p class="site-author-name" itemprop="name">Yuan LIAO</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-完整的目录结构"><span class="nav-number">1.</span> <span class="nav-text"><a href="#1-&#x5B8C;&#x6574;&#x7684;&#x76EE;&#x5F55;&#x7ED3;&#x6784;" class="headerlink" title="1. &#x5B8C;&#x6574;&#x7684;&#x76EE;&#x5F55;&#x7ED3;&#x6784;"></a>1. &#x5B8C;&#x6574;&#x7684;&#x76EE;&#x5F55;&#x7ED3;&#x6784;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-忘了是什么内容了。。。。"><span class="nav-number">2.</span> <span class="nav-text"><a href="#2-&#x5FD8;&#x4E86;&#x662F;&#x4EC0;&#x4E48;&#x5185;&#x5BB9;&#x4E86;&#x3002;&#x3002;&#x3002;&#x3002;" class="headerlink" title="2. &#x5FD8;&#x4E86;&#x662F;&#x4EC0;&#x4E48;&#x5185;&#x5BB9;&#x4E86;&#x3002;&#x3002;&#x3002;&#x3002;"></a>2. &#x5FD8;&#x4E86;&#x662F;&#x4EC0;&#x4E48;&#x5185;&#x5BB9;&#x4E86;&#x3002;&#x3002;&#x3002;&#x3002;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Directive-指令"><span class="nav-number">3.</span> <span class="nav-text"><a href="#3-Directive-&#x6307;&#x4EE4;" class="headerlink" title="3. Directive &#x6307;&#x4EE4;"></a>3. Directive &#x6307;&#x4EE4;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-name"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#3-1-name" class="headerlink" title="3.1 name:"></a><strong>3.1 name</strong>:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-priority"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#3-2-priority" class="headerlink" title="3.2 priority:"></a><strong>3.2 priority</strong>:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-restrict-restrict-39-39"><span class="nav-number">3.3.</span> <span class="nav-text"><a href="#3-3-restrict-restrict-39-39" class="headerlink" title="3.3 restrict: restrict: &apos;&apos;**"></a><strong>3.3 restrict:</strong> <code>restrict: &apos;&apos;</code>**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-transclude-replace-true-fasle（在使用指令可以嵌套内容"><span class="nav-number">3.4.</span> <span class="nav-text"><a href="#3-5-transclude-replace-true-fasle&#xFF08;&#x5728;&#x4F7F;&#x7528;&#x6307;&#x4EE4;&#x53EF;&#x4EE5;&#x5D4C;&#x5957;&#x5185;&#x5BB9;" class="headerlink" title="3.5 transclude: replace: true/fasle&#xFF08;&#x5728;&#x4F7F;&#x7528;&#x6307;&#x4EE4;&#x53EF;&#x4EE5;&#x5D4C;&#x5957;&#x5185;&#x5BB9;)"></a><strong>3.5 transclude: <code>replace: true/fasle</code>&#xFF08;&#x5728;&#x4F7F;&#x7528;&#x6307;&#x4EE4;&#x53EF;&#x4EE5;&#x5D4C;&#x5957;&#x5185;&#x5BB9;)</strong></span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-1-两种形式的比较-transclude-true和transclude-39-element-39"><span class="nav-number">3.4.1.</span> <span class="nav-text"><a href="#3-5-1-&#x4E24;&#x79CD;&#x5F62;&#x5F0F;&#x7684;&#x6BD4;&#x8F83;-transclude-true&#x548C;transclude-39-element-39" class="headerlink" title="3.5.1 &#x4E24;&#x79CD;&#x5F62;&#x5F0F;&#x7684;&#x6BD4;&#x8F83;:  transclude: true&#x548C;transclude: &apos;element&apos;"></a>3.5.1 &#x4E24;&#x79CD;&#x5F62;&#x5F0F;&#x7684;&#x6BD4;&#x8F83;:  <code>transclude: true</code>&#x548C;<code>transclude: &apos;element&apos;</code></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-2-transclude-函数-还没明白。。。。。。。。。。。！！！"><span class="nav-number">3.4.2.</span> <span class="nav-text"><a href="#3-5-2-transclude-&#x51FD;&#x6570;-&#x8FD8;&#x6CA1;&#x660E;&#x767D;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#xFF01;&#xFF01;&#xFF01;" class="headerlink" title="3.5.2 transclude()&#x51FD;&#x6570;   ???&#x8FD8;&#x6CA1;&#x660E;&#x767D;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#xFF01;&#xFF01;&#xFF01;"></a>3.5.2 transclude()&#x51FD;&#x6570;   ???&#x8FD8;&#x6CA1;&#x660E;&#x767D;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#x3002;&#xFF01;&#xFF01;&#xFF01;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-scope-独立scope"><span class="nav-number">3.5.</span> <span class="nav-text"><a href="#3-2-scope-&#x72EC;&#x7ACB;scope" class="headerlink" title="3.2 scope (&#x72EC;&#x7ACB;scope):"></a><em>3.2 scope (&#x72EC;&#x7ACB;scope):</em></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-template"><span class="nav-number">3.6.</span> <span class="nav-text"><a href="#3-6-template" class="headerlink" title="3.6 template:"></a><strong>3.6 template:</strong></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-templateUrl"><span class="nav-number">3.7.</span> <span class="nav-text"><a href="#3-7-templateUrl" class="headerlink" title="3.7 templateUrl:"></a><strong>3.7 templateUrl</strong>:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8-Controller-controller-function-scope-element-attrs-transclude"><span class="nav-number">3.8.</span> <span class="nav-text"><a href="#3-8-Controller-controller-function-scope-element-attrs-transclude" class="headerlink" title="3.8 Controller: controller: function($scope, $element, $attrs, $transclude) { };"></a><em>3.8 Controller</em>: <code>controller: function($scope, $element, $attrs, $transclude) { };</code></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-9-require-require-39-hello-39"><span class="nav-number">3.9.</span> <span class="nav-text"><a href="#3-9-require-require-39-hello-39" class="headerlink" title="3.9 require: require: &apos;?^hello&apos;"></a><strong>3.9 require: <code>require: &apos;?^hello&apos;</code></strong></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-10-Compile"><span class="nav-number">3.10.</span> <span class="nav-text"><a href="#3-10-Compile" class="headerlink" title="3.10 Compile:"></a>3.10 Compile:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-11-link-link-function-scope-element-attrs-ctrl-transclude"><span class="nav-number">3.11.</span> <span class="nav-text"><a href="#3-11-link-link-function-scope-element-attrs-ctrl-transclude" class="headerlink" title="3.11 link: link: function(scope, element, attrs, ctrl, transclude){}"></a><em>3.11 link: <code>link: function(scope, element, attrs, ctrl, transclude){}</code></em></span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#controller-link和compile的关系："><span class="nav-number">3.11.1.</span> <span class="nav-text"><a href="#controller-link&#x548C;compile&#x7684;&#x5173;&#x7CFB;&#xFF1A;" class="headerlink" title="controller, link&#x548C;compile&#x7684;&#x5173;&#x7CFB;&#xFF1A;"></a>controller, link&#x548C;compile&#x7684;&#x5173;&#x7CFB;&#xFF1A;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#directive的-内置指令"><span class="nav-number">3.12.</span> <span class="nav-text"><a href="#directive&#x7684;-&#x5185;&#x7F6E;&#x6307;&#x4EE4;" class="headerlink" title="directive&#x7684; &#x5185;&#x7F6E;&#x6307;&#x4EE4;"></a><em>directive&#x7684; &#x5185;&#x7F6E;&#x6307;&#x4EE4;</em></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Service-amp-Provider"><span class="nav-number">4.</span> <span class="nav-text"><a href="#4-Service-amp-Provider" class="headerlink" title="4. Service&amp;Provider"></a>4. Service&amp;Provider</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-HTTP服务"><span class="nav-number">4.1.</span> <span class="nav-text"><a href="#4-1-HTTP&#x670D;&#x52A1;" class="headerlink" title="4.1 HTTP&#x670D;&#x52A1;"></a><em>4.1 HTTP&#x670D;&#x52A1;</em></span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-1-Filter"><span class="nav-number">4.1.1.</span> <span class="nav-text"><a href="#4-1-1-Filter" class="headerlink" title="4.1.1 Filter"></a><em>4.1.1 Filter</em></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-2-其它常用的Service-内置的共24个"><span class="nav-number">4.1.2.</span> <span class="nav-text"><a href="#4-1-2-&#x5176;&#x5B83;&#x5E38;&#x7528;&#x7684;Service-&#x5185;&#x7F6E;&#x7684;&#x5171;24&#x4E2A;" class="headerlink" title="4.1.2 &#x5176;&#x5B83;&#x5E38;&#x7528;&#x7684;Service: &#x5185;&#x7F6E;&#x7684;&#x5171;24&#x4E2A;"></a>4.1.2 &#x5176;&#x5B83;&#x5E38;&#x7528;&#x7684;Service: &#x5185;&#x7F6E;&#x7684;&#x5171;24&#x4E2A;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它知识点"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x5176;&#x5B83;&#x77E5;&#x8BC6;&#x70B9;" class="headerlink" title="&#x5176;&#x5B83;&#x77E5;&#x8BC6;&#x70B9;"></a>&#x5176;&#x5B83;&#x77E5;&#x8BC6;&#x70B9;</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核心原理解析"><span class="nav-number"></span> <span class="nav-text"><a href="#&#x6838;&#x5FC3;&#x539F;&#x7406;&#x89E3;&#x6790;" class="headerlink" title="&#x6838;&#x5FC3;&#x539F;&#x7406;&#x89E3;&#x6790;"></a>&#x6838;&#x5FC3;&#x539F;&#x7406;&#x89E3;&#x6790;</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-AngularJS的启动过程分析"><span class="nav-number">1.</span> <span class="nav-text"><a href="#1-AngularJS&#x7684;&#x542F;&#x52A8;&#x8FC7;&#x7A0B;&#x5206;&#x6790;" class="headerlink" title="1. AngularJS&#x7684;&#x542F;&#x52A8;&#x8FC7;&#x7A0B;&#x5206;&#x6790;"></a>1. AngularJS&#x7684;&#x542F;&#x52A8;&#x8FC7;&#x7A0B;&#x5206;&#x6790;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-依赖注入原理分析：-Povider与Injector"><span class="nav-number">2.</span> <span class="nav-text"><a href="#2-&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x539F;&#x7406;&#x5206;&#x6790;&#xFF1A;-Povider&#x4E0E;Injector" class="headerlink" title="2. &#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x539F;&#x7406;&#x5206;&#x6790;&#xFF1A; Povider&#x4E0E;Injector"></a>2. &#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x539F;&#x7406;&#x5206;&#x6790;&#xFF1A; Povider&#x4E0E;Injector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-指令的执行过程分析"><span class="nav-number">3.</span> <span class="nav-text"><a href="#3-&#x6307;&#x4EE4;&#x7684;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x5206;&#x6790;" class="headerlink" title="3. &#x6307;&#x4EE4;&#x7684;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x5206;&#x6790;"></a>3. &#x6307;&#x4EE4;&#x7684;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x5206;&#x6790;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-scope与双向数据绑定分析"><span class="nav-number">4.</span> <span class="nav-text"><a href="#4-scope&#x4E0E;&#x53CC;&#x5411;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x5206;&#x6790;" class="headerlink" title="4. $scope&#x4E0E;&#x53CC;&#x5411;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x5206;&#x6790;"></a>4. $scope&#x4E0E;&#x53CC;&#x5411;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x5206;&#x6790;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuan LIAO</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,763 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="AngularJS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="AngularJS1.x 数据绑定过程 – \$watch, \$apply, \$digest 笔记参考于翻译：理解\$watch ，\$apply 和 \$digest — 理解数据绑定过程 英语原文：Watch how the apply runs a digest  浏览器事件循环和Angular.js扩展​    我们的浏览器一直等待，比如用户交互。假如你点击一个按键或者在输入框里输入东">
+<meta name="keywords" content="AngularJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AngularJS1.x 部件">
+<meta property="og:url" content="//YuanLIAOcode.github.io/2017/08/02/angularJS部件/index.html">
+<meta property="og:site_name" content="Record My Life">
+<meta property="og:description" content="AngularJS1.x 数据绑定过程 – \$watch, \$apply, \$digest 笔记参考于翻译：理解\$watch ，\$apply 和 \$digest — 理解数据绑定过程 英语原文：Watch how the apply runs a digest  浏览器事件循环和Angular.js扩展​    我们的浏览器一直等待，比如用户交互。假如你点击一个按键或者在输入框里输入东">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-05T21:59:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AngularJS1.x 部件">
+<meta name="twitter:description" content="AngularJS1.x 数据绑定过程 – \$watch, \$apply, \$digest 笔记参考于翻译：理解\$watch ，\$apply 和 \$digest — 理解数据绑定过程 英语原文：Watch how the apply runs a digest  浏览器事件循环和Angular.js扩展​    我们的浏览器一直等待，比如用户交互。假如你点击一个按键或者在输入框里输入东">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="//YuanLIAOcode.github.io/2017/08/02/angularJS部件/"/>
+
+
+
+
+
+  <title>AngularJS1.x 部件 | Record My Life</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-102582468-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Record My Life</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="//YuanLIAOcode.github.io/2017/08/02/angularJS部件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuan LIAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Record My Life">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AngularJS1.x 部件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T17:12:18+02:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="AngularJS1-x-数据绑定过程-–-watch-apply-digest"><a href="#AngularJS1-x-数据绑定过程-–-watch-apply-digest" class="headerlink" title="AngularJS1.x 数据绑定过程 – \$watch, \$apply, \$digest"></a>AngularJS1.x 数据绑定过程 – \$watch, \$apply, \$digest</h2><blockquote>
+<p>笔记参考于翻译：<a href="http://www.angularjs.cn/A0a6" target="_blank" rel="noopener">理解\$watch ，\$apply 和 \$digest — 理解数据绑定过程</a></p>
+<p>英语原文：<a href="http://angular-tips.com/blog/2013/08/watch-how-the-apply-runs-a-digest/" target="_blank" rel="noopener">Watch how the apply runs a digest</a></p>
+</blockquote>
+<h3 id="浏览器事件循环和Angular-js扩展"><a href="#浏览器事件循环和Angular-js扩展" class="headerlink" title="浏览器事件循环和Angular.js扩展"></a>浏览器事件循环和Angular.js扩展</h3><p>​    我们的浏览器一直等待，比如用户交互。假如你点击一个按键或者在输入框里输入东西，事件的回调函数就会在javascript解释器里执行，然后你就可以做任何DOM操作，等回调函数执行完毕时，浏览器就会相应地对DOM做出变化。Angular拓展了这个事件循环，生成一个有时称为<code>angular context</code>的执行环境。</p>
+<blockquote>
+<p>记住<code>angualr context</code>这个重要的概念。其联系到接下来说的<code>$apply</code> ，<code>$digest</code>，<code>$watch</code> 的使用。</p>
+</blockquote>
+<h4 id="1-watch队列-watch-list"><a href="#1-watch队列-watch-list" class="headerlink" title="1.$watch队列 (\$watch list)"></a>1.<code>$watch</code>队列 (\$watch list)</h4><p>​    每次你绑定一些东西到那你的UI上时，你就会往  \$watch 队列里插入一条<code>$watch</code>。想象一下<code>$watch</code>就是那个可以检测它所监视的model里有变化的时候的东西。</p>
+<blockquote>
+<p>只有绑定到UI后，才会生成一个<code>$watch</code></p>
+</blockquote>
+<ul>
+<li><code>$watch</code>的生成时间: 当我们的模板加载完成时，也就是在linking简短(Angular分为compile阶段和linking阶段)，Angular解释器会寻找每个directvie, 然后生成每个需要的<code>$watch</code></li>
+</ul>
+<h4 id="2-digest-循环"><a href="#2-digest-循环" class="headerlink" title="2. $digest 循环"></a>2. <code>$digest</code> 循环</h4><p>​    当浏览器接收到可以被<code>angualr context</code> 处理的事件时，<code>$digest</code>循环就会触发。</p>
+<p>​    这个循环是由两个更小的循环组合起来的。一个处理<code>evalAsync</code>队列，另一个处理<code>$watch</code>队列。<code>$digest</code>队列将会遍历我们的<code>$watch</code>，并且对<code>$watch</code>一个个进行询问检查<code>$watch</code>是否有更新过，这就是所谓的<code>dirty-checking</code>。如果其中至少有一个<code>$watch</code>更新过，那这个循环将会再次触发，直到所有的<code>$watch</code>都没有变化。这样就能保证每个model都已经不再变换。</p>
+<blockquote>
+<p>如果在处理<code>$watch</code>时， `$digest循环超过10次，那它将会抛出一个异常，防止无限循环。</p>
+</blockquote>
+<p>​    当<code>$digest</code>循环结束时，DOM会相应地变化。</p>
+<h4 id="3-通过-apply来进入angualr-context"><a href="#3-通过-apply来进入angualr-context" class="headerlink" title="3. 通过$apply来进入angualr context"></a>3. 通过<code>$apply</code>来进入<code>angualr context</code></h4><p>​    <strong><code>$apply</code> 决定事件是否进入<code>angualr context</code>！</strong></p>
+<p>​    当事件触发时，如果你调用<code>$apply</code>，则该事件会进入<code>angular context</code>，如果没有调用则不会进入。</p>
+<ul>
+<li>什么时候Angualr不会自动为我们调用<code>$apply</code>？</li>
+</ul>
+<h2 id="Controller-directive-model使用情况："><a href="#Controller-directive-model使用情况：" class="headerlink" title="Controller directive model使用情况："></a><code>Controller</code> <code>directive</code> <code>model</code>使用情况：</h2><blockquote>
+<p>笔记参考于：<a href="http://damoqiongqiu.iteye.com/blog/1971204" target="_blank" rel="noopener">AngularJS：何时应该使用Directive、Controller、Service?</a></p>
+</blockquote>
+<p>通过<code>scope</code>来维护数据时非常粗暴的一种方式，由于其它<code>controller</code> <code>directive</code> <code>model</code> 的英系那个，<code>scope</code>很容易就会崩溃或者变脏。它很快就会变成一团乱麻。<br>通过一种集中的途径（在这里，就是<code>service</code>)来管理所有数据，然后通过某种方式来请求修改它，这样不仅仅会更加清晰，同时当应用的体积不断增大的同时也更容易管理。<br>最后，它还可以让我们的代码模块化（这也是Angular很擅长的一件事情）。一旦我们在其它项目中需要用到这个<code>service</code>，我们没有必要在<code>scope</code> <code>controller</code> <code>filter</code>等等东西里面到处去查找相关的代码，因为所用东西都在<code>service</code>里面。</p>
+<p><code>service</code>使用情形：无论何时，当我们需要在不同的域中共享数据的时候，我们需要使用<code>service</code>。另外，多亏了Angualr的依赖注入系统，实现这一点是很容易的。</p>
+<p><code>controller</code>使用情形：<code>controller</code>应该纯粹地用力把<code>service</code>，依赖关系以及其它对象串联到一起，然后通过<code>scope</code>把它们关联到<code>view</code>上。<br>如果在我们的视图里面需要处理复杂的业务逻辑，那么把它们放到<code>controller</code>里面也是一个非常不错的选择。</p>
+<p><code>directive</code>使用情形：在我们编写的大量<code>AngularJS</code>应用中，应用中最主要的复杂部分都在<code>directive</code>中，它被用来操作和修改DOM。</p>
+<h2 id="Angular-JS-之-Factory-VS-Service-VS-Provider"><a href="#Angular-JS-之-Factory-VS-Service-VS-Provider" class="headerlink" title="Angular JS 之 Factory VS Service VS Provider"></a>Angular JS 之 Factory VS Service VS Provider</h2><blockquote>
+<p>笔记参考: <a href="http://www.oschina.net/translate/angularjs-factory-vs-service-vs-provider" target="_blank" rel="noopener">AngularJS 之 Factory vs Service vs Provider</a></p>
+<p>英语原文：[AngularJS: Factory vs Service vs Provider]<a href="https://tylermcginnis.com/angularjs-factory-vs-service-vs-provider/" target="_blank" rel="noopener">https://tylermcginnis.com/angularjs-factory-vs-service-vs-provider/</a>)</p>
+</blockquote>
+<p>​    Angular 应用里大部分的业务逻辑和持久化数据都应该放在service里。</p>
+<p>​    Controller 不应该用来保存持久化数据。出于内存性能的考虑，controller只在需要的时候才会初始化，一旦不需要就会被抛弃。因此，每次当你切换或刷新页面的时候，Angular 就会清空当前的controller。与此同时，service可以用来永久保存应用的数据，并且这些数据可以在不同的controller之间使用。</p>
+<p>​    Angular 提供了3种方法创建并注册我们自己的service。</p>
+<ul>
+<li>Factory</li>
+<li>Service</li>
+<li>Provider</li>
+</ul>
+<h5 id="简而言之："><a href="#简而言之：" class="headerlink" title="简而言之："></a>简而言之：</h5><ol>
+<li><p>用Factory就是创建一个对象，为它添加属性，然后把这个对象返回出来。你把service传进controller之后，在controller里这个对象的属性就可以通过factory使用了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'myFactoryCtrl'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">$scope, myFactory</span>) </span>&#123;</span><br><span class="line">  $scope.artist = myFactory.getArtist()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.factory(<span class="string">'myFactory'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _artist = <span class="string">''</span>;</span><br><span class="line">  <span class="keyword">var</span> service = &#123;&#125;</span><br><span class="line"></span><br><span class="line">  service.getArtist = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> _artist</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> service;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Service 是用<code>new</code>关键字实例化的。因此，你应该给<code>this</code>添加属性，然后service返回 <code>this</code>。你把service传进controller之后，在controller里 <code>this</code> 上的属性就可以通过 service 来使用了。</p>
+</li>
+</ol>
+<blockquote>
+<p>Javascript中 <code>new</code> 关键字具体怎么工作的，见下文。。。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'myServiceCtrl'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">$scope, myService</span>) </span>&#123;</span><br><span class="line">  $scope.artist = myService.getArtist();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.service(<span class="string">'myService'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _artist = <span class="string">''</span>;</span><br><span class="line">  <span class="keyword">this</span>.getArtist = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> _artist;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Providers是唯一一种你可以传进 <code>.config()</code> 函数的service。当你想要在service对象启用之前，先进行模块范围的配置，那就应该用provider。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'myProviderCtrl'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">$scope, myProvider</span>) </span>&#123;</span><br><span class="line">  $scope.artist = myProvider.getArtist();</span><br><span class="line">  $scope.data.thingFromConfig = myProvider.thingOnConfig;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.provider(<span class="string">'myProvider'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>._artist = <span class="string">''</span>;</span><br><span class="line">  <span class="keyword">this</span>.thingFromConfig = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//Only the properties on the object returned from $get are available in the controller.</span></span><br><span class="line">  <span class="keyword">this</span>.$get = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      getArtist: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> that._artist;</span><br><span class="line">      &#125;,</span><br><span class="line">      thingonConfig: that.thingFromConfig</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.config(<span class="function"><span class="keyword">function</span> (<span class="params">myProviderProvider</span>) </span>&#123;</span><br><span class="line">  myProviderProvider.thingFromConfig = <span class="string">'This was set in config()'</span>;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="详细的比较："><a href="#详细的比较：" class="headerlink" title="详细的比较："></a>详细的比较：</h5><blockquote>
+<p>暂时未补充。。。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AngularJS/" rel="tag"># AngularJS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/14/3mac使用tree命令/" rel="next" title="Mac环境使用tree命令查看目录树">
+                <i class="fa fa-chevron-left"></i> Mac环境使用tree命令查看目录树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/01/5AngularJS 依赖注入/" rel="prev" title="AngularJS 依赖注入">
+                AngularJS 依赖注入 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Yuan LIAO" />
+          <p class="site-author-name" itemprop="name">Yuan LIAO</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AngularJS1-x-数据绑定过程-–-watch-apply-digest"><span class="nav-number">1.</span> <span class="nav-text"><a href="#AngularJS1-x-&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x8FC7;&#x7A0B;-&#x2013;-watch-apply-digest" class="headerlink" title="AngularJS1.x &#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x8FC7;&#x7A0B; &#x2013; \$watch, \$apply, \$digest"></a>AngularJS1.x &#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x8FC7;&#x7A0B; &#x2013; \$watch, \$apply, \$digest</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器事件循环和Angular-js扩展"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#&#x6D4F;&#x89C8;&#x5668;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x548C;Angular-js&#x6269;&#x5C55;" class="headerlink" title="&#x6D4F;&#x89C8;&#x5668;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x548C;Angular.js&#x6269;&#x5C55;"></a>&#x6D4F;&#x89C8;&#x5668;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x548C;Angular.js&#x6269;&#x5C55;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-watch队列-watch-list"><span class="nav-number">1.1.1.</span> <span class="nav-text"><a href="#1-watch&#x961F;&#x5217;-watch-list" class="headerlink" title="1.$watch&#x961F;&#x5217; (\$watch list)"></a>1.<code>$watch</code>&#x961F;&#x5217; (\$watch list)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-digest-循环"><span class="nav-number">1.1.2.</span> <span class="nav-text"><a href="#2-digest-&#x5FAA;&#x73AF;" class="headerlink" title="2. $digest &#x5FAA;&#x73AF;"></a>2. <code>$digest</code> &#x5FAA;&#x73AF;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-通过-apply来进入angualr-context"><span class="nav-number">1.1.3.</span> <span class="nav-text"><a href="#3-&#x901A;&#x8FC7;-apply&#x6765;&#x8FDB;&#x5165;angualr-context" class="headerlink" title="3. &#x901A;&#x8FC7;$apply&#x6765;&#x8FDB;&#x5165;angualr context"></a>3. &#x901A;&#x8FC7;<code>$apply</code>&#x6765;&#x8FDB;&#x5165;<code>angualr context</code></span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Controller-directive-model使用情况："><span class="nav-number">2.</span> <span class="nav-text"><a href="#Controller-directive-model&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF1A;" class="headerlink" title="Controller directive model&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF1A;"></a><code>Controller</code> <code>directive</code> <code>model</code>&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF1A;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Angular-JS-之-Factory-VS-Service-VS-Provider"><span class="nav-number">3.</span> <span class="nav-text"><a href="#Angular-JS-&#x4E4B;-Factory-VS-Service-VS-Provider" class="headerlink" title="Angular JS &#x4E4B; Factory VS Service VS Provider"></a>Angular JS &#x4E4B; Factory VS Service VS Provider</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#简而言之："><span class="nav-number">3.0.0.1.</span> <span class="nav-text"><a href="#&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF1A;" class="headerlink" title="&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF1A;"></a>&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF1A;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#详细的比较："><span class="nav-number">3.0.0.2.</span> <span class="nav-text"><a href="#&#x8BE6;&#x7EC6;&#x7684;&#x6BD4;&#x8F83;&#xFF1A;" class="headerlink" title="&#x8BE6;&#x7EC6;&#x7684;&#x6BD4;&#x8F83;&#xFF1A;"></a>&#x8BE6;&#x7EC6;&#x7684;&#x6BD4;&#x8F83;&#xFF1A;</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuan LIAO</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
