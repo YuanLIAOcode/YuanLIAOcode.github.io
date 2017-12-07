@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -100,7 +100,7 @@
 <meta property="og:url" content="//YuanLIAOcode.github.io/2017/09/20/6.1ML笔记_Week1/index.html">
 <meta property="og:site_name" content="Record My Life">
 <meta property="og:description" content="Machine Learning Machine learning is the field of study that gives computers the ability to learn without being explicitly programmed  Supervised LearningIn supervised learning, we are given a data se">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="en">
 <meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/model_representation.png">
 <meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/cost_function.png">
 <meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/cost_function_scatterPlot1.png">
@@ -113,7 +113,7 @@
 <meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/learning_rate1.png">
 <meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/learning_rate2.png">
 <meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/batch_gradient_descent.png">
-<meta property="og:updated_time" content="2017-12-07T00:27:07.000Z">
+<meta property="og:updated_time" content="2017-12-07T00:46:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Coursera Ng Adrew Machine Learning_Note week1">
 <meta name="twitter:description" content="Machine Learning Machine learning is the field of study that gives computers the ability to learn without being explicitly programmed  Supervised LearningIn supervised learning, we are given a data se">
@@ -131,7 +131,7 @@
     motion: true,
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -178,7 +178,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -226,7 +226,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            首页
+            Home
           </a>
         </li>
       
@@ -236,7 +236,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            归档
+            Archives
           </a>
         </li>
       
@@ -246,7 +246,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            标签
+            Tags
           </a>
         </li>
       
@@ -306,9 +306,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-20T18:11:11+02:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-20T18:11:11+02:00">
                 2017-09-20
               </time>
             
@@ -373,8 +373,8 @@
 </ul>
 <p>When the target variable that we’re trying to predict is continuous, we call the learning problem a regression problem. When target $y$ can take on only a small nnumber of discrete values, we call it a classification problem.</p>
 <h3 id="Linear-Regression-with-One-Variable"><a href="#Linear-Regression-with-One-Variable" class="headerlink" title="Linear Regression with One Variable"></a>Linear Regression with One Variable</h3><p>Suppose we have a hypothesis function $h_{\theta} = \theta_0 + \theta_1 x$. </p>
-<h4 id="Cost-Function"><a href="#Cost-Function" class="headerlink" title="Cost Function"></a>Cost Function</h4><p>Then we can measure the accuracy of our hypothesis function by using a <code>cost function</code>. This takes an average difference (actually a fancier version of an average) of all the results of hypothesis with inputs from $x’s$ and the actual outputs $y’s$.</p>
-<p><code>Cost function</code>: $J(\theta_0, \theta<em>1) = \frac{1}{2m} \sum^m</em>{i=1} (\hat{y_i} - y<em>i)^2 = \frac{1}{2m} \sum(h</em>{\theta}(x_i) - y_i)^2$</p>
+<h4 id="Cost-Function"><a href="#Cost-Function" class="headerlink" title="Cost Function"></a>Cost Function</h4><p>Then we can measure the accuracy of our hypothesis function by using a <code>cost function</code>. This takes an average difference (actually a fancier version of an average) of all the results of hypothesis with inputs from $x’s$ and the actual outputs $y’s$. </p>
+<p><code>Cost function</code>: $J(\theta_0, \theta<em>1)$ $ = \frac{1}{2m}\sum^{m} </em> {i=1} (\hat {y_i} - y<em>i)^2 = \frac{1}{2m} \sum(h</em>{\theta}(x_i) - y_i)^2$</p>
 <p>To break it apart, it is $\frac{1}{2} \bar{x}$ where $\bar{x}$ is the mean of the squares of $h_{\theta} x_i - y_i$, or the difference between the predicted value and the actual value.</p>
 <p>This cost function is otherwise called the “Squared error function”, or “Mean squared error”.</p>
 <p>The mean is halved $(\frac{1}{2})$ as a convenience for the computation of the gradient descent, as the derivative term of the square function will cancel out the $\frac{1}{2}$ . </p>
@@ -536,10 +536,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
+            Overview
           </li>
         </ul>
       
@@ -560,7 +560,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">8</span>
-                <span class="site-state-item-name">日志</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -573,7 +573,7 @@
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
                 <span class="site-state-item-count">8</span>
-                <span class="site-state-item-name">标签</span>
+                <span class="site-state-item-name">tags</span>
               </a>
             </div>
           
@@ -639,11 +639,11 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  主题 -
+  Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>
