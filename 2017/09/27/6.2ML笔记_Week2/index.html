@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="AngularJS," />
+  <meta name="keywords" content="Machine Learning," />
 
 
 
@@ -93,18 +93,20 @@
 
 
 
-<meta name="description" content="Angular JS 模块的概念和依赖注入分析 部分英文参考: Understanding Dependency Injection部分中文参考：Angualr JS 模块化与依赖注入 Angular JS 使用模块化的组织方式，和依赖注入的设计。这使得模块之间耦合度较低，模块更容易复用，同时支持声明式的编程风格。">
-<meta name="keywords" content="AngularJS">
+<meta name="description" content="Gradient DescentFeature ScalingTo speed up gradient descent, two techniques to help with this are feature scaling and mean normalization.   Feature scaling involves dividing the input values by the ra">
+<meta name="keywords" content="Machine Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AngularJS 依赖注入">
-<meta property="og:url" content="//YuanLIAOcode.github.io/2017/09/01/5AngularJS 依赖注入/index.html">
+<meta property="og:title" content="Coursera_Machine Learning_Andrew Ng_Note week2">
+<meta property="og:url" content="//YuanLIAOcode.github.io/2017/09/27/6.2ML笔记_Week2/index.html">
 <meta property="og:site_name" content="Record My Life">
-<meta property="og:description" content="Angular JS 模块的概念和依赖注入分析 部分英文参考: Understanding Dependency Injection部分中文参考：Angualr JS 模块化与依赖注入 Angular JS 使用模块化的组织方式，和依赖注入的设计。这使得模块之间耦合度较低，模块更容易复用，同时支持声明式的编程风格。">
+<meta property="og:description" content="Gradient DescentFeature ScalingTo speed up gradient descent, two techniques to help with this are feature scaling and mean normalization.   Feature scaling involves dividing the input values by the ra">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-06T20:56:11.000Z">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/27/6.2ML笔记_Week2/Normal_Equation.png">
+<meta property="og:updated_time" content="2017-12-06T22:13:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AngularJS 依赖注入">
-<meta name="twitter:description" content="Angular JS 模块的概念和依赖注入分析 部分英文参考: Understanding Dependency Injection部分中文参考：Angualr JS 模块化与依赖注入 Angular JS 使用模块化的组织方式，和依赖注入的设计。这使得模块之间耦合度较低，模块更容易复用，同时支持声明式的编程风格。">
+<meta name="twitter:title" content="Coursera_Machine Learning_Andrew Ng_Note week2">
+<meta name="twitter:description" content="Gradient DescentFeature ScalingTo speed up gradient descent, two techniques to help with this are feature scaling and mean normalization.   Feature scaling involves dividing the input values by the ra">
+<meta name="twitter:image" content="//yuanliaocode.github.io/2017/09/27/6.2ML笔记_Week2/Normal_Equation.png">
 
 
 
@@ -132,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="//YuanLIAOcode.github.io/2017/09/01/5AngularJS 依赖注入/"/>
+  <link rel="canonical" href="//YuanLIAOcode.github.io/2017/09/27/6.2ML笔记_Week2/"/>
 
 
 
 
 
-  <title>AngularJS 依赖注入 | Record My Life</title>
+  <title>Coursera_Machine Learning_Andrew Ng_Note week2 | Record My Life</title>
   
 
 
@@ -266,7 +268,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="//YuanLIAOcode.github.io/2017/09/01/5AngularJS 依赖注入/">
+    <link itemprop="mainEntityOfPage" href="//YuanLIAOcode.github.io/2017/09/27/6.2ML笔记_Week2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yuan LIAO">
@@ -283,7 +285,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AngularJS 依赖注入</h1>
+          <h1 class="post-title" itemprop="name headline">Coursera_Machine Learning_Andrew Ng_Note week2</h1>
         
 
         <div class="post-meta">
@@ -295,8 +297,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-01T11:41:12+02:00">
-                2017-09-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-27T12:06:14+02:00">
+                2017-09-27
               </time>
             
 
@@ -330,38 +332,68 @@
       
 
       
-        <h2 id="Angular-JS-模块的概念和依赖注入分析"><a href="#Angular-JS-模块的概念和依赖注入分析" class="headerlink" title="Angular JS 模块的概念和依赖注入分析"></a>Angular JS 模块的概念和依赖注入分析</h2><blockquote>
-<p>部分英文参考: <a href="https://github.com/angular/angular.js/wiki/Understanding-Dependency-Injection" target="_blank" rel="noopener">Understanding Dependency Injection</a><br>部分中文参考：<a href="http://harttle.com/2015/06/07/angular-module.html" target="_blank" rel="noopener">Angualr JS 模块化与依赖注入</a></p>
-<p>Angular JS 使用模块化的组织方式，和依赖注入的设计。这使得模块之间耦合度较低，模块更容易复用，同时支持声明式的编程风格。</p>
+        <h2 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h2><h3 id="Feature-Scaling"><a href="#Feature-Scaling" class="headerlink" title="Feature Scaling"></a>Feature Scaling</h3><p>To speed up gradient descent, two techniques to help with this are <code>feature scaling</code> and <code>mean normalization</code>. </p>
+<blockquote>
+<p><code>Feature scaling</code> involves dividing the input values by the range(i.e the maximum value minus the minmun value) of the input variable, resuliting in a new range of just 1. </p>
+<p><code>Mean nirmalization</code> involves subtracting the average value for an input variable from the values for that input variable resulting in a nwe average value for the input variable of just zero.</p>
+<p>The delta will descend quickly on small ranges and slowly on large ranges.</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="模块概念"><a href="#模块概念" class="headerlink" title="模块概念"></a>模块概念</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'(这里声明模块的名字)'</span>, [<span class="string">'(这里列出该模块所依赖的其它模块的名字'</span>, <span class="string">''</span>..])</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Module 依赖： 在声明一个模块时，需要给出依赖模块的列表。同时这些模块对应的JS需要在HTML中加以引入。一个模块中，默认引入了 Service, Directive 和 Filter模块。</p>
-</blockquote>
+<p>To implement both of these techniques, we can ajust our input values as shown in this formula:</p>
+<p>$x_i := \frac{x_i - u_i}{S_i}$</p>
 <ul>
-<li>区分Module依赖和Service依赖:<br>​    在声明Controller, Service, Directive 和 Filter的工厂方法中，把依赖的Service直接放到参数列表中，Angular 的 <code>$injector</code> 会自动注入生成这些Service。</li>
+<li>$u_i$ is the average of all the values for feature (i) </li>
+<li>$S_i$ is the range of values (max - min), or $S_i$ is the standard deviation</li>
 </ul>
-<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><p>​    在Angular中， Directive, Service, Filter, Controller都是以工厂法的方式给出，而工厂方法的参数名对应着（与其相同）该工厂方法所依赖的Service。</p>
-<p>​    以Controller为例，有两种声明方式:</p>
-<ol>
-<li><p>不使用字符串数组</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'aCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $http</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//some code</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p> 在上述的<code>function</code>执行之间，Angualr <code>$injectro</code> 会生成一个 <code>scope</code> 实例和 <code>$http</code> 实例，并传入该方法。如果你希望对JS进行压缩处理，那么参数名称可能会发生变化，Angular的 <code>$injector</code> 则不能正确地把这个控制器所依赖的Service注入</p>
-</li>
-<li><p>使用字符串数组的形式来声明依赖项。(字符串常量不会被压缩) ：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'aCtrl'</span>, [<span class="string">'$scope'</span>, <span class="string">'$http'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $http</span>)</span>&#123;</span><br><span class="line">  <span class="comment">//some code</span></span><br><span class="line">&#125;])</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>另外，还可以同时设置 <code>$injector</code> 来显示地声明所依赖的Service:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> worldCtrl = <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $http</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// some code</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">worldCtrl.$inject = [<span class="string">'$scope'</span>, <span class="string">'http'</span>];</span><br><span class="line">app.controller(<span class="string">'worldCtrl'</span>, worldCtrl);</span><br></pre></td></tr></table></figure></p>
-<p>  <code>constant</code>方法<br>​    </p>
-<h3 id="注入器-injector"><a href="#注入器-injector" class="headerlink" title="注入器($injector)"></a>注入器($injector)</h3><pre><code>注入器负责
-每个Angular JS应用都有唯一一个`$injector`，当应用启动的时就会生成一个，你可以通过将 `$inject` 注入到任何可以注入函数中来得到它 (`$inject` 知道如何注入它自己)
-</code></pre><blockquote>
-<p>我们不能在 <code>constant</code> 和 <code>value</code> 中注入任何东西。因为 <code>constant</code> 和 <code>value</code> 总是返回一个静态值，它们不会被注入器调用。</p>
+<h3 id="Learning-rate-⍺"><a href="#Learning-rate-⍺" class="headerlink" title="Learning rate(⍺):"></a>Learning rate(<code>⍺</code>):</h3><ul>
+<li>if <code>⍺</code> is too samll: slow convergence</li>
+<li>if <code>⍺</code> is too large: J(<code>𝛅</code>) may not decrease on every iteration; may not converge ( slow convergence also possible)</li>
+</ul>
+<p><strong>Tip</strong>: To choose <code>⍺</code>, try …., 0.001, …, 0.01, …., 0.1, …, 1, ….</p>
+<h2 id="Normal-Equation"><a href="#Normal-Equation" class="headerlink" title="Normal Equation"></a>Normal Equation</h2><blockquote>
+<p>Gradient descent gives one way of minizing J. There is a second way of doing so, this time performing the minizaiton explicitly and without resorting to an iterative algorithm. </p>
+<p>In the ‘Noramal Equation’, method, we will minimize J by explicitly taking its derivatives with respect to the $𝛿_J$ ‘s, and setting them to zero. This allow us to find the optimum theta without iteration. The normal equation formula is given below:</p>
 </blockquote>
-<h3 id="控制器-controller"><a href="#控制器-controller" class="headerlink" title="控制器($controller)"></a>控制器($controller)</h3><pre><code>控制器可以被注入，但是控制器本身是不能被注入到任何东西里去的。这是因为控制器不是通过Provider创建的。但Angular JS内部有一个` $controller` 服务器，用来负责初始化你的控制器。比如说，当你调用 `myMod.controller(...)` 这个控制器时，其实我们在访问这个服务器的provider。
-</code></pre>
+<p> <img src="/2017/09/27/6.2ML笔记_Week2/Normal_Equation.png" alt="Normal Equation"></p>
+<blockquote>
+<p>There is <strong>no need</strong> to do feature scaling with the normal equation.</p>
+</blockquote>
+<h4 id="Comparison-of-gradient-descent-and-the-normal-equation"><a href="#Comparison-of-gradient-descent-and-the-normal-equation" class="headerlink" title="Comparison of gradient descent and the normal equation"></a>Comparison of gradient descent and the normal equation</h4><table>
+<thead>
+<tr>
+<th>Gradient Descent</th>
+<th>Normal Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Need to choose alpha</td>
+<td>No nee to choose alpha</td>
+</tr>
+<tr>
+<td>Needs many iterations</td>
+<td>No need to iterate</td>
+</tr>
+<tr>
+<td>O($kn^2$)</td>
+<td>O($n^3$), need to calculate inverse of $X^T X$</td>
+</tr>
+<tr>
+<td>Works well when n is large(about x &gt;10, 000)</td>
+<td>Slow if n is very large</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Normal-Equation-Noninvertibility"><a href="#Normal-Equation-Noninvertibility" class="headerlink" title="Normal Equation Noninvertibility"></a>Normal Equation Noninvertibility</h4><p>If $X^T X$ is non-invertible, the common causes might be having:</p>
+<ul>
+<li>Redundant features, where two features are very closely related(i.e they are linearly dependent)</li>
+<li>Too many features(e.g m&lt;= n). We could delete some features or use <code>regularization</code> </li>
+</ul>
+<blockquote>
+<p>In Octave or Matlab, we want to use the <code>pinv</code> function(pseudo inverse) rather than <code>inv</code></p>
+<p>The <code>pinv</code> function will give us a value of delta even if $X^T$ is not invertible.</p>
+</blockquote>
+
       
     </div>
 
@@ -390,7 +422,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/AngularJS/" rel="tag"># AngularJS</a>
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
           
         </div>
       
@@ -403,8 +435,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/02/angularJS部件/" rel="next" title="AngularJS1.x 部件">
-                <i class="fa fa-chevron-left"></i> AngularJS1.x 部件
+              <a href="/2017/09/20/6.1ML笔记_Week1/" rel="next" title="Coursera Ng Adrew Machine Learning_Note week1">
+                <i class="fa fa-chevron-left"></i> Coursera Ng Adrew Machine Learning_Note week1
               </a>
             
           </div>
@@ -412,10 +444,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/20/6.1ML笔记_Week1/" rel="prev" title="Coursera Ng Adrew Machine Learning_Note week1">
-                Coursera Ng Adrew Machine Learning_Note week1 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -535,7 +563,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Angular-JS-模块的概念和依赖注入分析"><span class="nav-number">1.</span> <span class="nav-text"><a href="#Angular-JS-&#x6A21;&#x5757;&#x7684;&#x6982;&#x5FF5;&#x548C;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x5206;&#x6790;" class="headerlink" title="Angular JS &#x6A21;&#x5757;&#x7684;&#x6982;&#x5FF5;&#x548C;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x5206;&#x6790;"></a>Angular JS &#x6A21;&#x5757;&#x7684;&#x6982;&#x5FF5;&#x548C;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x5206;&#x6790;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块概念"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6A21;&#x5757;&#x6982;&#x5FF5;" class="headerlink" title="&#x6A21;&#x5757;&#x6982;&#x5FF5;"></a>&#x6A21;&#x5757;&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖注入"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4F9D;&#x8D56;&#x6CE8;&#x5165;" class="headerlink" title="&#x4F9D;&#x8D56;&#x6CE8;&#x5165;"></a>&#x4F9D;&#x8D56;&#x6CE8;&#x5165;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注入器-injector"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#&#x6CE8;&#x5165;&#x5668;-injector" class="headerlink" title="&#x6CE8;&#x5165;&#x5668;($injector)"></a>&#x6CE8;&#x5165;&#x5668;($injector)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制器-controller"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#&#x63A7;&#x5236;&#x5668;-controller" class="headerlink" title="&#x63A7;&#x5236;&#x5668;($controller)"></a>&#x63A7;&#x5236;&#x5668;($controller)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient-Descent"><span class="nav-number">1.</span> <span class="nav-text"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature-Scaling"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#Feature-Scaling" class="headerlink" title="Feature Scaling"></a>Feature Scaling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Learning-rate-⍺"><span class="nav-number">1.2.</span> <span class="nav-text"><a href="#Learning-rate-&#x237A;" class="headerlink" title="Learning rate(&#x237A;):"></a>Learning rate(<code>&#x237A;</code>):</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Normal-Equation"><span class="nav-number">2.</span> <span class="nav-text"><a href="#Normal-Equation" class="headerlink" title="Normal Equation"></a>Normal Equation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Comparison-of-gradient-descent-and-the-normal-equation"><span class="nav-number">2.0.1.</span> <span class="nav-text"><a href="#Comparison-of-gradient-descent-and-the-normal-equation" class="headerlink" title="Comparison of gradient descent and the normal equation"></a>Comparison of gradient descent and the normal equation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Normal-Equation-Noninvertibility"><span class="nav-number">2.0.2.</span> <span class="nav-text"><a href="#Normal-Equation-Noninvertibility" class="headerlink" title="Normal Equation Noninvertibility"></a>Normal Equation Noninvertibility</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

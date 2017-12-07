@@ -1,0 +1,803 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Machine Learning," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Machine Learning Machine learning is the field of study that gives computers the ability to learn without being explicitly programmed  Supervised LearningIn supervised learning, we are given a data se">
+<meta name="keywords" content="Machine Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Coursera Ng Adrew Machine Learning_Note week1">
+<meta property="og:url" content="//YuanLIAOcode.github.io/2017/09/20/6.1ML笔记_Week1/index.html">
+<meta property="og:site_name" content="Record My Life">
+<meta property="og:description" content="Machine Learning Machine learning is the field of study that gives computers the ability to learn without being explicitly programmed  Supervised LearningIn supervised learning, we are given a data se">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/model_representation.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/cost_function.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/cost_function_scatterPlot1.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/cost_function_scatterPlot2.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/cost_function_scatterPlot3.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/cost_function_contourPlot1.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/cost_function_contourPlot2.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/gradient_Descent1.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/simultaneousUpdate.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/learning_rate1.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/learning_rate2.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/batch_gradient_descent.png">
+<meta property="og:updated_time" content="2017-12-07T00:21:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Coursera Ng Adrew Machine Learning_Note week1">
+<meta name="twitter:description" content="Machine Learning Machine learning is the field of study that gives computers the ability to learn without being explicitly programmed  Supervised LearningIn supervised learning, we are given a data se">
+<meta name="twitter:image" content="//yuanliaocode.github.io/2017/09/20/6.1ML笔记_Week1/model_representation.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="//YuanLIAOcode.github.io/2017/09/20/6.1ML笔记_Week1/"/>
+
+
+
+
+
+  <title>Coursera Ng Adrew Machine Learning_Note week1 | Record My Life</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-102582468-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Record My Life</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="//YuanLIAOcode.github.io/2017/09/20/6.1ML笔记_Week1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuan LIAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Record My Life">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Coursera Ng Adrew Machine Learning_Note week1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-20T18:11:11+02:00">
+                2017-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Machine-Learning"><a href="#Machine-Learning" class="headerlink" title="Machine Learning"></a>Machine Learning</h2><blockquote>
+<p>Machine learning is the field of study that gives computers the ability to learn without being explicitly programmed</p>
+</blockquote>
+<h3 id="Supervised-Learning"><a href="#Supervised-Learning" class="headerlink" title="Supervised Learning"></a>Supervised Learning</h3><p>In supervised learning, we are given a data set and already know what our correct output shold look like, having the idea that there is a relationship between the input and output.</p>
+<blockquote>
+<p>In supervised learning, for each data in the data set, there shoule be a corresponding correct answer.</p>
+</blockquote>
+<a id="more"></a>
+<p>Supervised learning problems are categorized into “regression” and “ classfication” problems. </p>
+<ul>
+<li>In a regression problem(predict real-valued output), we are trying to predict results within a continuous output, meaning that we are trying to map input variables to some conntinuous function. </li>
+<li>In a classification problem(discrete-valued output), we are instead trying to predict results in a discrete output. In other words, we are trying to map input variables into discrete categories. </li>
+</ul>
+<h3 id="Unsupervise-Learning"><a href="#Unsupervise-Learning" class="headerlink" title="Unsupervise Learning"></a>Unsupervise Learning</h3><p>Unsupervised learning allows us to approach problems with little or no idea what our results should look like. We can derive structure from data where we don’t necessarily know the effect of the variables.</p>
+<p>We can derive this structure by clustering the data based on relationships among the variables in the data.</p>
+<p>With unsupervised learning there is no feedback based on the prediction results.</p>
+<blockquote>
+<p>In unsupervised learning, there is no concept of attributes or labels.</p>
+</blockquote>
+<p>Example:</p>
+<ul>
+<li>Clustering: Take a collection of 1,000,000 different genes, and find a way to automatically group these genes into groups that are somehow similar or related by different variables, such as lifespan, location, roles, and so on.</li>
+<li>Non-clustering: The “Cocktail Party Algorithm”</li>
+</ul>
+<h3 id="Regression-and-Classification"><a href="#Regression-and-Classification" class="headerlink" title="Regression and Classification"></a>Regression and Classification</h3><p><img src="/2017/09/20/6.1ML笔记_Week1/model_representation.png" alt="model_representation"></p>
+<ul>
+<li>The difference between <code>Regression</code> problem and <code>Classification</code> problem:</li>
+</ul>
+<p>When the target variable that we’re trying to predict is continuous, we call the learning problem a regression problem. When target $y$ can take on only a small nnumber of discrete values, we call it a classification problem.</p>
+<h3 id="Linear-Regression-with-One-Variable"><a href="#Linear-Regression-with-One-Variable" class="headerlink" title="Linear Regression with One Variable"></a>Linear Regression with One Variable</h3><p>Suppose we have a hypothesis function $h_{\theta} = \theta_0 + \theta_1 x$. </p>
+<h4 id="Cost-Function"><a href="#Cost-Function" class="headerlink" title="Cost Function"></a>Cost Function</h4><p>Then we can measure the accuracy of our hypothesis function by using a <code>cost function</code>. This takes an average difference (actually a fancier version of an average) of all the results of hypothesis with inputs from $x’s$ and the actual outputs $y’s$.</p>
+<p><code>Cost function</code>: $J(\theta_0, \theta<em>1) = \frac{1}{2m} \sum^m</em>{i=1} (\hat{y_i} - y<em>i)^2 = \frac{1}{2m} \sum(h</em>{\theta}(x_i) - y_i)^2$</p>
+<p>To break it apart, it is $\frac{1}{2} \bar{x}$ where $\bar{x}$ is the mean of the squares of $h_{\theta} x_i - y_i$, or the difference between the predicted value and the actual value.</p>
+<p>This cost function is otherwise called the “Squared error function”, or “Mean squared error”.</p>
+<p>The mean is halved $(\frac{1}{2})$ as a convenience for the computation of the gradient descent, as the derivative term of the square function will cancel out the $\frac{1}{2}$ . </p>
+<p>The following image summarizes what the cost function does:</p>
+<p><img src="/2017/09/20/6.1ML笔记_Week1/cost_function.png" alt="Cost Function"></p>
+<h4 id="Cost-Function-Visualization"><a href="#Cost-Function-Visualization" class="headerlink" title="Cost Function Visualization"></a>Cost Function Visualization</h4><h5 id="First-Intuition-1-Scatter-Plot"><a href="#First-Intuition-1-Scatter-Plot" class="headerlink" title="First Intuition 1: Scatter Plot"></a>First Intuition 1: Scatter Plot</h5><p>Our training data set is scattered on the <code>x-y</code> plane. We are trying to make a straight line (define by $h_{\theta} = \theta_0 + \theta_1 x$) which passes through these scattered data points.</p>
+<p>Our objective is to get the best possible line. The best possible will be such so that the average squared vertical distances of the scattered points from the line will be the least.</p>
+<ul>
+<li>$\theta_1 = 1$:</li>
+</ul>
+<p>Ideally, the line should pass through all the points of our training data set, and in such case, the value of our cost function $J(\theta_0, \theta_1$) will be 0. The folloing image shows the ideal situation where we have a cost function of 0 </p>
+<p><img src="/2017/09/20/6.1ML笔记_Week1/cost_function_scatterPlot1.png" alt="cost_function_scatterPlot1"></p>
+<ul>
+<li>$\theta_1 = 0.5$:</li>
+</ul>
+<p>We see the vertical distance from our fit to the data points increase. This increase our cost function to 0.58.</p>
+<p><img src="/2017/09/20/6.1ML笔记_Week1/cost_function_scatterPlot2.png" alt="cost_function_scatterPlot2"></p>
+<ul>
+<li>Plotting several other points yields to the following graph:</li>
+</ul>
+<p><img src="/2017/09/20/6.1ML笔记_Week1/cost_function_scatterPlot3.png" alt="cost_function_scatterPlot3"></p>
+<p>In this case, $\theta_1 = 1$ is our global minimum.</p>
+<h5 id="First-Intuition-2-contour-Plot"><a href="#First-Intuition-2-contour-Plot" class="headerlink" title="First Intuition 2: contour Plot"></a>First Intuition 2: contour Plot</h5><blockquote>
+<p>A contour plot is a graph that contains many contour lines. A contour line of a two variable function has a constant value at all points of the same line.</p>
+</blockquote>
+<p>The circled x displays the value of the cost function.</p>
+<p>The three green points found on the green line below have the same value for $J(\theta_0, \theta_1$) and as a result, they are found along the same line.</p>
+<p><img src="/2017/09/20/6.1ML笔记_Week1/cost_function_contourPlot1.png" alt="cost_function_contourPlot"></p>
+<p>The graph below minumizes the cost function as much as possible and consequently, the result of $\theta_1$ and $\theta_0$ tend to be around 0.12 and 250 respectively. Plotting those value on our graph to the right seems to put our point in the center of the inner most ‘circle’.</p>
+<p><img src="/2017/09/20/6.1ML笔记_Week1/cost_function_contourPlot2.png" alt="cost_function_contourPlot2"></p>
+<h4 id="“Batch”-Gradient-Descent"><a href="#“Batch”-Gradient-Descent" class="headerlink" title="“Batch” Gradient Descent"></a>“Batch” Gradient Descent</h4><blockquote>
+<p>“Batch”: Each step of gradient descent uses all the training examples. ($\sum<em>{i=1}^{m} (h</em>\theta (x^{(i)}) - y^{(i)} )$)</p>
+</blockquote>
+<p>Imagine that we graph our hypothesis function based on its fields $\theta_0$ and $\theta_1$ (actually we are graphing the cost function as a function of the parameter estimates). We are not graphing x and y itself, but the parameter range of our hypothesis function and the cost resulting from selecting a particular set of parameters.</p>
+<p>We put $\theta_0$ on the x axis and $\theta_1$ on the y axis, with the cost function on the vertical z axis. The points on our graph will be the result of the cost function using our hypothesis with those specific theta parameters. The graph below depicts such a setup.</p>
+<blockquote>
+<p>The red arrows show the minimum points in the graph.</p>
+</blockquote>
+<p><img src="/2017/09/20/6.1ML笔记_Week1/gradient_Descent1.png" alt="gradient_Descent1"></p>
+<p>The way we do this is by taking the derivative (the tangential line to a function) of our cost function. The slope of the tangent is the derivative at that point and it will give us a direction to move towards. We make steps down the cost function in the direction with the steepest descent. The size of each step is determined by the parameter $\alpha$, which is called the learning rate. </p>
+<ul>
+<li>Gradient descent algorithm:</li>
+</ul>
+<p>Repeat until convergence: $\theta_j := \theta_j - \alpha \frac{\partial}{\partial{\theta_j}}J = \theta<em>j - \alpha \frac{1}{m} \sum^m</em>{i=1}(h_\theta (x^{(i)}) - y^{(i)}) x_j^{(i)}$, where j = 0, 1 represents the feature index number, m represents the number of training example.</p>
+<p>At each iteration j, one should simultaneously update the parameters $\theta_0, \theta_1, \theta_2, …, \theta_n$. Updating a specific parameter prior to calculating another one on the $j^{(th)}$ iteration would yield to a wrong implementation.</p>
+<p><img src="/2017/09/20/6.1ML笔记_Week1/simultaneousUpdate.png" alt="simultaneousUpdate"></p>
+<h5 id="Learning-rate-alpha"><a href="#Learning-rate-alpha" class="headerlink" title="Learning rate $\alpha$"></a>Learning rate $\alpha$</h5><p>We should adjust our parameter $\alpha$ to ensure that the gradient descent algorithm converges in a reasonable time. But we should avoid to choose an inappropriate value:</p>
+<p><img src="/2017/09/20/6.1ML笔记_Week1/learning_rate1.png" alt="learning_rate"></p>
+<p>Gradient descent can be converge to a local minimum, even with the learning rate $\alpha$ fixed. As we approach a local minimum, gradient descent will automatically take smaller steps. So, no need to decrease $\alpha$ over time.</p>
+<p><img src="/2017/09/20/6.1ML笔记_Week1/learning_rate2.png" alt="learning_rate2"></p>
+<p>So, this is simply gradient descent on the original cost function J. This method looks at every example in the entire training set on every step, and is called <strong>batch gradient descent</strong>. </p>
+<p>Note that, while gradient descent can be susceptible to local minima in general, the optimization problem we have posed here for linear regression has only one global, and no other local, optima; thus gradient descent always converges (assuming the learning rate α is not too large) to the global minimum. </p>
+<p>Indeed, J is a convex quadratic function. Here is an example of gradient descent as it is run to minimize a quadratic function.</p>
+<p>The trajectory taken by gradient descent (contour of a quadratic function):</p>
+<blockquote>
+<p>The x’s in the figure (joined by straight lines) mark the successive values of $\theta$ that gradient descent went through as it converged to its minimum.</p>
+</blockquote>
+<p><img src="/2017/09/20/6.1ML笔记_Week1/batch_gradient_descent.png" alt="batch_gradient_descent"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/01/5AngularJS 依赖注入/" rel="next" title="AngularJS 依赖注入">
+                <i class="fa fa-chevron-left"></i> AngularJS 依赖注入
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/27/6.2ML笔记_Week2/" rel="prev" title="Coursera_Machine Learning_Andrew Ng_Note week2">
+                Coursera_Machine Learning_Andrew Ng_Note week2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Yuan LIAO" />
+          <p class="site-author-name" itemprop="name">Yuan LIAO</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Machine-Learning"><span class="nav-number">1.</span> <span class="nav-text"><a href="#Machine-Learning" class="headerlink" title="Machine Learning"></a>Machine Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Supervised-Learning"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#Supervised-Learning" class="headerlink" title="Supervised Learning"></a>Supervised Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unsupervise-Learning"><span class="nav-number">1.2.</span> <span class="nav-text"><a href="#Unsupervise-Learning" class="headerlink" title="Unsupervise Learning"></a>Unsupervise Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Regression-and-Classification"><span class="nav-number">1.3.</span> <span class="nav-text"><a href="#Regression-and-Classification" class="headerlink" title="Regression and Classification"></a>Regression and Classification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linear-Regression-with-One-Variable"><span class="nav-number">1.4.</span> <span class="nav-text"><a href="#Linear-Regression-with-One-Variable" class="headerlink" title="Linear Regression with One Variable"></a>Linear Regression with One Variable</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cost-Function"><span class="nav-number">1.4.1.</span> <span class="nav-text"><a href="#Cost-Function" class="headerlink" title="Cost Function"></a>Cost Function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cost-Function-Visualization"><span class="nav-number">1.4.2.</span> <span class="nav-text"><a href="#Cost-Function-Visualization" class="headerlink" title="Cost Function Visualization"></a>Cost Function Visualization</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#First-Intuition-1-Scatter-Plot"><span class="nav-number">1.4.2.1.</span> <span class="nav-text"><a href="#First-Intuition-1-Scatter-Plot" class="headerlink" title="First Intuition 1: Scatter Plot"></a>First Intuition 1: Scatter Plot</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#First-Intuition-2-contour-Plot"><span class="nav-number">1.4.2.2.</span> <span class="nav-text"><a href="#First-Intuition-2-contour-Plot" class="headerlink" title="First Intuition 2: contour Plot"></a>First Intuition 2: contour Plot</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#“Batch”-Gradient-Descent"><span class="nav-number">1.4.3.</span> <span class="nav-text"><a href="#&#x201C;Batch&#x201D;-Gradient-Descent" class="headerlink" title="&#x201C;Batch&#x201D; Gradient Descent"></a>&#x201C;Batch&#x201D; Gradient Descent</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Learning-rate-alpha"><span class="nav-number">1.4.3.1.</span> <span class="nav-text"><a href="#Learning-rate-alpha" class="headerlink" title="Learning rate $\alpha$"></a>Learning rate $\alpha$</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuan LIAO</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
