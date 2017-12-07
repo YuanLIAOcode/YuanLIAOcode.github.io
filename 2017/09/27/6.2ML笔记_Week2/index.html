@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Machine Learning," />
+  <meta name="keywords" content="Machine Learning,Linear Regression," />
 
 
 
@@ -93,20 +93,22 @@
 
 
 
-<meta name="description" content="Gradient DescentFeature ScalingTo speed up gradient descent, two techniques to help with this are feature scaling and mean normalization.   Feature scaling involves dividing the input values by the ra">
-<meta name="keywords" content="Machine Learning">
+<meta name="description" content="Multivariate Linear RegressionMultiple FeaturesLinear regression with multiple variables is also known as “multivariable linear regression”. Suppose we have a hypothesis with n features: h_{\theta}(x)">
+<meta name="keywords" content="Machine Learning,Linear Regression">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Coursera_Machine Learning_Andrew Ng_Note week2">
 <meta property="og:url" content="//YuanLIAOcode.github.io/2017/09/27/6.2ML笔记_Week2/index.html">
 <meta property="og:site_name" content="Record My Life">
-<meta property="og:description" content="Gradient DescentFeature ScalingTo speed up gradient descent, two techniques to help with this are feature scaling and mean normalization.   Feature scaling involves dividing the input values by the ra">
+<meta property="og:description" content="Multivariate Linear RegressionMultiple FeaturesLinear regression with multiple variables is also known as “multivariable linear regression”. Suppose we have a hypothesis with n features: h_{\theta}(x)">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/27/6.2ML笔记_Week2/multiple_gradientDescent.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/27/6.2ML笔记_Week2/comparasion_gradientDescent.png">
 <meta property="og:image" content="//yuanliaocode.github.io/2017/09/27/6.2ML笔记_Week2/Normal_Equation.png">
-<meta property="og:updated_time" content="2017-12-06T22:13:10.000Z">
+<meta property="og:updated_time" content="2017-12-07T12:20:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Coursera_Machine Learning_Andrew Ng_Note week2">
-<meta name="twitter:description" content="Gradient DescentFeature ScalingTo speed up gradient descent, two techniques to help with this are feature scaling and mean normalization.   Feature scaling involves dividing the input values by the ra">
-<meta name="twitter:image" content="//yuanliaocode.github.io/2017/09/27/6.2ML笔记_Week2/Normal_Equation.png">
+<meta name="twitter:description" content="Multivariate Linear RegressionMultiple FeaturesLinear regression with multiple variables is also known as “multivariable linear regression”. Suppose we have a hypothesis with n features: h_{\theta}(x)">
+<meta name="twitter:image" content="//yuanliaocode.github.io/2017/09/27/6.2ML笔记_Week2/multiple_gradientDescent.png">
 
 
 
@@ -332,25 +334,71 @@
       
 
       
-        <h2 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h2><h3 id="Feature-Scaling"><a href="#Feature-Scaling" class="headerlink" title="Feature Scaling"></a>Feature Scaling</h3><p>To speed up gradient descent, two techniques to help with this are <code>feature scaling</code> and <code>mean normalization</code>. </p>
+        <h2 id="Multivariate-Linear-Regression"><a href="#Multivariate-Linear-Regression" class="headerlink" title="Multivariate Linear Regression"></a>Multivariate Linear Regression</h2><h3 id="Multiple-Features"><a href="#Multiple-Features" class="headerlink" title="Multiple Features"></a>Multiple Features</h3><p>Linear regression with multiple variables is also known as “multivariable linear regression”.</p>
+<p>Suppose we have a hypothesis with n features:</p>
+<script type="math/tex; mode=display">h_{\theta}(x) = \theta_0 + \theta_1 + \theta_2 + … + \theta_x</script><p>and we also have notation:<br><a id="more"></a></p>
+<ul>
+<li>$x^{(i)}_j$ : value of feature j in the $i^{th} training example</li>
+<li>$x^{i}$ : the input (features) of the $i^{th}$ training example</li>
+<li>m : the number of training examples</li>
+<li>n : the number of features</li>
+</ul>
+<p>In order to represent our multivariable hypothesis consisely, we can use the definition of matrix multiplication:</p>
+<script type="math/tex; mode=display">
+h_{\theta} (x) = 
+\left[
+\begin{array} 
+&\theta_0 & \theta_1 & \theta_2  & \cdots & \theta_n 
+\end{array}
+\right]
+\left[
+\begin{array} 
+&x_0 \\ x_1 \\ x_2 \\ \vdots \\ x_n 
+\end{array}
+\right]
+= \theta^T x</script><blockquote>
+<p>Note that for convenience reasons, we assume $x^{(i)}_0 = 1$ for (i $\in$ 1, 2, …, m). This allows us to do matrix operations with theta and x.</p>
+</blockquote>
+<h3 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h3><p>The gradient descent equation itself is generally the same form; we just have to repeat it for our n’features:</p>
+<p>Repeat until convergence:</p>
+<p><img src="/2017/09/27/6.2ML笔记_Week2/multiple_gradientDescent.png" alt="multiple_gradient"></p>
+<p>In other words.</p>
+<ul>
+<li>Repeat until convergence:</li>
+</ul>
+<script type="math/tex; mode=display">
+\theta_j := \theta_0 - \alpha \frac{1}{m} \sum^m_{i=1} (h_{\theta} (x^{(i)}) - y^{(i)}) \cdot x^{(i)}_j  for j := 0, 1, ..., n</script><p>Comparasion: Gradient descent with on variable to gradient descent with multiple variable:</p>
+<p><img src="/2017/09/27/6.2ML笔记_Week2/comparasion_gradientDescent.png" alt="comparasion_gradientDescent"></p>
+<h4 id="Feature-Scaling"><a href="#Feature-Scaling" class="headerlink" title="Feature Scaling"></a>Feature Scaling</h4><p>To speed up gradient descent, two techniques to help with this are <code>feature scaling</code> and <code>mean normalization</code>. </p>
 <blockquote>
 <p><code>Feature scaling</code> involves dividing the input values by the range(i.e the maximum value minus the minmun value) of the input variable, resuliting in a new range of just 1. </p>
 <p><code>Mean nirmalization</code> involves subtracting the average value for an input variable from the values for that input variable resulting in a nwe average value for the input variable of just zero.</p>
 <p>The delta will descend quickly on small ranges and slowly on large ranges.</p>
 </blockquote>
-<a id="more"></a>
 <p>To implement both of these techniques, we can ajust our input values as shown in this formula:</p>
 <p>$x_i := \frac{x_i - u_i}{S_i}$</p>
 <ul>
 <li>$u_i$ is the average of all the values for feature (i) </li>
 <li>$S_i$ is the range of values (max - min), or $S_i$ is the standard deviation</li>
 </ul>
-<h3 id="Learning-rate-⍺"><a href="#Learning-rate-⍺" class="headerlink" title="Learning rate(⍺):"></a>Learning rate(<code>⍺</code>):</h3><ul>
+<h4 id="Learning-rate-⍺"><a href="#Learning-rate-⍺" class="headerlink" title="Learning rate(⍺):"></a>Learning rate(<code>⍺</code>):</h4><ul>
 <li>if <code>⍺</code> is too samll: slow convergence</li>
 <li>if <code>⍺</code> is too large: J(<code>𝛅</code>) may not decrease on every iteration; may not converge ( slow convergence also possible)</li>
 </ul>
 <p><strong>Tip</strong>: To choose <code>⍺</code>, try …., 0.001, …, 0.01, …., 0.1, …, 1, ….</p>
-<h2 id="Normal-Equation"><a href="#Normal-Equation" class="headerlink" title="Normal Equation"></a>Normal Equation</h2><blockquote>
+<h4 id="Features-and-Polynomial-Regression"><a href="#Features-and-Polynomial-Regression" class="headerlink" title="Features and Polynomial Regression"></a>Features and Polynomial Regression</h4><p>In order to improve our features and the form of out hypothesis function, we can cobine multiple features into one. For example ,we can combine $x_1$ and $x_2$ into a new feature $x_3$ by taking $x_1 \cdot x_2$.</p>
+<p>Here we are going to introduce the <code>Polynomial Regression</code> by giving some examples.</p>
+<p>We can change the behavior or curve of our hypothesis function by taking it a quadratic, cubic or square root function (or any other form), when our hypothesis function need not be linear (a straight line) if that does not fit the data well.</p>
+<p>For example, if our hypothesis function is <script type="math/tex">h_{\theta} (x) = \theta_0 + \theta_1 x_1</script> </p>
+<p>then we can create additional features based on $x<em>1$, to get the quadratic function $$h</em>{\theta} (x) = \theta_0 + \theta_1 x_1 + \theta_2 x^2_1$$  </p>
+<p>, or the cubic function <script type="math/tex">h_{\theta} (x) = \theta_0 + \theta_1 x_1 + \theta_3 x^3_1</script> </p>
+<p>, in the cubic version, we have created new features $x_2$ and $x_3$ where $x_2 = x^2_1 $and $x_3 = x^3_1$.</p>
+<p>To make it a square root function, we could do: <script type="math/tex">h_{\theta} (x) = \theta_0 + \theta_1 x_1 + \theta_2 \sqrt{x_1}</script>  </p>
+<blockquote>
+<p>One important thing to keep in mind is, if we choose our features this way then feature scaling becomes very import.</p>
+<p>e.g. if $x_1$ has range 1 - 1000 then range of $x^2_1$ becomes 1 - 1000000 and that of$ x^3_1$ becomes 1 - 1000000000</p>
+</blockquote>
+<h3 id="Normal-Equation"><a href="#Normal-Equation" class="headerlink" title="Normal Equation"></a>Normal Equation</h3><blockquote>
 <p>Gradient descent gives one way of minizing J. There is a second way of doing so, this time performing the minizaiton explicitly and without resorting to an iterative algorithm. </p>
 <p>In the ‘Noramal Equation’, method, we will minimize J by explicitly taking its derivatives with respect to the $𝛿_J$ ‘s, and setting them to zero. This allow us to find the optimum theta without iteration. The normal equation formula is given below:</p>
 </blockquote>
@@ -358,7 +406,17 @@
 <blockquote>
 <p>There is <strong>no need</strong> to do feature scaling with the normal equation.</p>
 </blockquote>
-<h4 id="Comparison-of-gradient-descent-and-the-normal-equation"><a href="#Comparison-of-gradient-descent-and-the-normal-equation" class="headerlink" title="Comparison of gradient descent and the normal equation"></a>Comparison of gradient descent and the normal equation</h4><table>
+<h4 id="Normal-Equation-Noninvertibility"><a href="#Normal-Equation-Noninvertibility" class="headerlink" title="Normal Equation Noninvertibility"></a>Normal Equation Noninvertibility</h4><p>If $X^T X$ is non-invertible, the common causes might be having:</p>
+<ul>
+<li>Redundant features, where two features are very closely related(i.e they are linearly dependent)</li>
+<li>Too many features(e.g m&lt;= n). We could delete some features or use <code>regularization</code> </li>
+</ul>
+<blockquote>
+<p>In Octave or Matlab, we want to use the <code>pinv</code> function(pseudo inverse) rather than <code>inv</code></p>
+<p>The <code>pinv</code> function will give us a value of delta even if $X^T$ is not invertible.</p>
+</blockquote>
+<h3 id="Comparison-of-gradient-descent-and-the-normal-equation"><a href="#Comparison-of-gradient-descent-and-the-normal-equation" class="headerlink" title="Comparison of gradient descent and the normal equation"></a>Comparison of gradient descent and the normal equation</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>Gradient Descent</th>
@@ -384,15 +442,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="Normal-Equation-Noninvertibility"><a href="#Normal-Equation-Noninvertibility" class="headerlink" title="Normal Equation Noninvertibility"></a>Normal Equation Noninvertibility</h4><p>If $X^T X$ is non-invertible, the common causes might be having:</p>
-<ul>
-<li>Redundant features, where two features are very closely related(i.e they are linearly dependent)</li>
-<li>Too many features(e.g m&lt;= n). We could delete some features or use <code>regularization</code> </li>
-</ul>
-<blockquote>
-<p>In Octave or Matlab, we want to use the <code>pinv</code> function(pseudo inverse) rather than <code>inv</code></p>
-<p>The <code>pinv</code> function will give us a value of delta even if $X^T$ is not invertible.</p>
-</blockquote>
+</div>
 
       
     </div>
@@ -424,6 +474,8 @@
           
             <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
           
+            <a href="/tags/Linear-Regression/" rel="tag"># Linear Regression</a>
+          
         </div>
       
 
@@ -435,8 +487,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/20/6.1ML笔记_Week1/" rel="next" title="Coursera Ng Adrew Machine Learning_Note week1">
-                <i class="fa fa-chevron-left"></i> Coursera Ng Adrew Machine Learning_Note week1
+              <a href="/2017/09/23/7.1SQL笔记1/" rel="next" title="Coursera_Managing Big Data with MySQL_Note 1">
+                <i class="fa fa-chevron-left"></i> Coursera_Managing Big Data with MySQL_Note 1
               </a>
             
           </div>
@@ -444,6 +496,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/01/7.2SQL笔记2/" rel="prev" title="Coursera_Managing Big Data with MySQL_Note 2">
+                Coursera_Managing Big Data with MySQL_Note 2 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -515,7 +571,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -528,7 +584,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -563,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient-Descent"><span class="nav-number">1.</span> <span class="nav-text"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature-Scaling"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#Feature-Scaling" class="headerlink" title="Feature Scaling"></a>Feature Scaling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Learning-rate-⍺"><span class="nav-number">1.2.</span> <span class="nav-text"><a href="#Learning-rate-&#x237A;" class="headerlink" title="Learning rate(&#x237A;):"></a>Learning rate(<code>&#x237A;</code>):</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Normal-Equation"><span class="nav-number">2.</span> <span class="nav-text"><a href="#Normal-Equation" class="headerlink" title="Normal Equation"></a>Normal Equation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Comparison-of-gradient-descent-and-the-normal-equation"><span class="nav-number">2.0.1.</span> <span class="nav-text"><a href="#Comparison-of-gradient-descent-and-the-normal-equation" class="headerlink" title="Comparison of gradient descent and the normal equation"></a>Comparison of gradient descent and the normal equation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Normal-Equation-Noninvertibility"><span class="nav-number">2.0.2.</span> <span class="nav-text"><a href="#Normal-Equation-Noninvertibility" class="headerlink" title="Normal Equation Noninvertibility"></a>Normal Equation Noninvertibility</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Multivariate-Linear-Regression"><span class="nav-number">1.</span> <span class="nav-text"><a href="#Multivariate-Linear-Regression" class="headerlink" title="Multivariate Linear Regression"></a>Multivariate Linear Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multiple-Features"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#Multiple-Features" class="headerlink" title="Multiple Features"></a>Multiple Features</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradient-Descent"><span class="nav-number">1.2.</span> <span class="nav-text"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Feature-Scaling"><span class="nav-number">1.2.1.</span> <span class="nav-text"><a href="#Feature-Scaling" class="headerlink" title="Feature Scaling"></a>Feature Scaling</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Learning-rate-⍺"><span class="nav-number">1.2.2.</span> <span class="nav-text"><a href="#Learning-rate-&#x237A;" class="headerlink" title="Learning rate(&#x237A;):"></a>Learning rate(<code>&#x237A;</code>):</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Features-and-Polynomial-Regression"><span class="nav-number">1.2.3.</span> <span class="nav-text"><a href="#Features-and-Polynomial-Regression" class="headerlink" title="Features and Polynomial Regression"></a>Features and Polynomial Regression</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Normal-Equation"><span class="nav-number">1.3.</span> <span class="nav-text"><a href="#Normal-Equation" class="headerlink" title="Normal Equation"></a>Normal Equation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Normal-Equation-Noninvertibility"><span class="nav-number">1.3.1.</span> <span class="nav-text"><a href="#Normal-Equation-Noninvertibility" class="headerlink" title="Normal Equation Noninvertibility"></a>Normal Equation Noninvertibility</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparison-of-gradient-descent-and-the-normal-equation"><span class="nav-number">1.4.</span> <span class="nav-text"><a href="#Comparison-of-gradient-descent-and-the-normal-equation" class="headerlink" title="Comparison of gradient descent and the normal equation"></a>Comparison of gradient descent and the normal equation</span></a></li></ol></li></ol></div>
             
 
           </div>

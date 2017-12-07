@@ -1,0 +1,884 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MySQL," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Data Query LanguageQuery: SQL code that describes the data you desire and the format in which you want it. Six SQL Keywords SELECT the data I want FROM  these database and tables WHERE these criteria">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Coursera_Managing Big Data with MySQL_Note 2">
+<meta property="og:url" content="//YuanLIAOcode.github.io/2017/10/01/7.2SQL笔记2/index.html">
+<meta property="og:site_name" content="Record My Life">
+<meta property="og:description" content="Data Query LanguageQuery: SQL code that describes the data you desire and the format in which you want it. Six SQL Keywords SELECT the data I want FROM  these database and tables WHERE these criteria">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/10/01/7.2SQL笔记2/2.1SQL_Run_Order.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/10/01/7.2SQL笔记2/2.2JOIN.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/10/01/7.2SQL笔记2/2.3General_Strategy_of_Join_Table.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/10/01/7.2SQL笔记2/2.4Inner_JOIN1.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/10/01/7.2SQL笔记2/2.4Inner_JOIN2.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/10/01/7.2SQL笔记2/2.5Left_JOIN.png">
+<meta property="og:updated_time" content="2017-12-07T12:59:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Coursera_Managing Big Data with MySQL_Note 2">
+<meta name="twitter:description" content="Data Query LanguageQuery: SQL code that describes the data you desire and the format in which you want it. Six SQL Keywords SELECT the data I want FROM  these database and tables WHERE these criteria">
+<meta name="twitter:image" content="//yuanliaocode.github.io/2017/10/01/7.2SQL笔记2/2.1SQL_Run_Order.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="//YuanLIAOcode.github.io/2017/10/01/7.2SQL笔记2/"/>
+
+
+
+
+
+  <title>Coursera_Managing Big Data with MySQL_Note 2 | Record My Life</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-102582468-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Record My Life</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="//YuanLIAOcode.github.io/2017/10/01/7.2SQL笔记2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuan LIAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Record My Life">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Coursera_Managing Big Data with MySQL_Note 2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-01T22:02:32+02:00">
+                2017-10-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Data-Query-Language"><a href="#Data-Query-Language" class="headerlink" title="Data Query Language"></a>Data Query Language</h3><p><strong>Query:</strong></p>
+<p>SQL code that describes the data you desire and the format in which you want it.</p>
+<h3 id="Six-SQL-Keywords"><a href="#Six-SQL-Keywords" class="headerlink" title="Six SQL Keywords"></a>Six SQL Keywords</h3><blockquote>
+<p><strong>SELECT</strong> the data I want <strong>FROM </strong> these database and tables <strong>WHERE</strong> these criteria are met <strong>GROUP (BY)</strong> this field <strong>HAVING</strong> this property <strong>ORDER (BY)</strong> this field or list;</p>
+</blockquote>
+<ul>
+<li>SELECT  the data I want</li>
+<li>FROM   these database and tables</li>
+<li>WHERE  these criteria are met, and</li>
+<li>GROUP (BY)  this field</li>
+<li>HAVING  this property, then</li>
+<li>ORDER (BY)  this field or list;</li>
+</ul>
+<a id="more"></a>
+<blockquote>
+<p>In most SQL interfaces, extra wide spaces are usually ingonred, unless they’re within a string of text and casing quotation marks</p>
+</blockquote>
+<p>No data = NULL, rather than 0</p>
+<h4 id="Run-Order"><a href="#Run-Order" class="headerlink" title="Run Order"></a>Run Order</h4><p><img src="/2017/10/01/7.2SQL笔记2/2.1SQL_Run_Order.png" alt="SQL Run Order"></p>
+<blockquote>
+<p>This diagram shows us that data are actually grouped(<code>GROUP BY</code>) before the <code>SELECT</code>  expressions are applied.<br>That means that when a <code>GROUP BY</code> expression is included in an SQL query, there is no way to use a <code>SELECT</code> statement to summarize daa that cross multiple groups.</p>
+</blockquote>
+<h4 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h4><blockquote>
+<p>Every time we run a line of SQL code in <strong>Jupyter</strong>, we will need to preface the line with <code>%sql</code>. </p>
+</blockquote>
+<p><strong>Get to Know Our Data !</strong></p>
+<blockquote>
+<p>Before we start querying, </p>
+<ol>
+<li>Conform how many tables each database has</li>
+<li>Identify the fields contained in each table of the database.</li>
+</ol>
+</blockquote>
+<ul>
+<li><code>SHOW tables</code>: To determine how many tables each database has</li>
+</ul>
+<blockquote>
+<p> SHOW columns FROM databasename.tablename</p>
+<p> An alternate way to learn the same information would be to use the <code>DESCRIBE</code> function. The syntax is: <code>DESCRIBE tablename</code></p>
+</blockquote>
+<h3 id="Operator"><a href="#Operator" class="headerlink" title="Operator"></a>Operator</h3><ul>
+<li><code>IN</code>  operator</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> dog_guid, breed</span><br><span class="line"><span class="keyword">FROM</span> dogs</span><br><span class="line"><span class="keyword">WHERE</span> breed <span class="keyword">IN</span> (<span class="string">"golden retriever"</span>, <span class="string">"poodle"</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>LIKE</code> operator: allows us to specify a pattern that the textual data we query has to match.</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> dog_guid, breed</span><br><span class="line"><span class="keyword">FROM</span> dogs</span><br><span class="line"><span class="keyword">WHERE</span> breed <span class="keyword">LIKE</span> (<span class="string">"s%"</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>In this syntax, the percent sign indicates a wild card. Wild cards represent unlimited numbers of missing letters. This is how the placement of the percent sign would affect the results of the query:</p>
+<ul>
+<li>WHERE breed LIKE (“s%”) = the breed must start with “s”, but can have any number of letters after the “s”</li>
+<li>WHERE breed LIKE (“%s”) = the breed must end with “s”, but can have any number of letters before the “s”</li>
+<li>WHERE breed LIKE (“%s%”) = the breed must contain an “s” somewhere in its name, but can have any number of letters before or after the “s”</li>
+</ul>
+</blockquote>
+<h3 id="Clause"><a href="#Clause" class="headerlink" title="Clause"></a>Clause</h3><ul>
+<li><code>DISCTINCT</code> clause</li>
+</ul>
+<blockquote>
+<p>When the <code>DISCTINCT</code> clause is used with multiple columns in a <code>SELECT</code> statement, the combinaiton of all the columns together is used to determine the uniqueness of a row in a result set.</p>
+<p>When we use the <code>DISTINCT</code> clause with the <code>LIMIT</code> clause in a statement, MySQL stops searching when it finds the number of <code>unique</code> rows specified in th <code>LIMIT</code> clause, not when it goes through the number of rows in the <code>LIMIT</code> clause.</p>
+</blockquote>
+<ul>
+<li><code>OFFSET</code> </li>
+</ul>
+<blockquote>
+<p>LIMIT … OFFSET…</p>
+</blockquote>
+<ul>
+<li><code>WHERE</code></li>
+</ul>
+<p>The expression that follows a WHERE clause has to be applicable to each row of data in a column</p>
+<ul>
+<li><code>GROUP BY</code></li>
+</ul>
+<p>It’s userful to remember that SQL output is always a table. </p>
+<p>How could we construct a valid table that would have columns for aggregate counts and individual columns at the same time?<br>The answer is, <strong>WE CAN’T.</strong></p>
+<p><strong>A RULE:</strong></p>
+<blockquote>
+<p>Every non-aggregated field that is listed in the <code>SELECT</code> list must be listed in the <code>GROUP BY</code> list.</p>
+</blockquote>
+<p><strong>Note:</strong></p>
+<blockquote>
+<p>If we include a <code>GROUP BY</code> clause in our query, but forget to aggregate a column included in our <code>SELECT</code> list, MySQL will output a random row from the un-aggregated column when the query is executed.</p>
+<p>e.g:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; SELECT COUNT(d.breed), d.dog_guid AS dDogID, d.breed_type, d.user_guid</span><br><span class="line">&gt; FROM dogs d</span><br><span class="line">&gt; GROUP BY d.user_guid</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>This query would be executed in MySQL, but a random value in the <code>d.dog_guid</code> and <code>d.breed_type</code> would be outputted for each output row tha reports a count of a given breed number.</p>
+</blockquote>
+<p>Difference between <code>SELECT/GROUP BY</code> and <code>COUNT DISTINCT</code>:</p>
+<blockquote>
+<p>COUNT DISTINCT dose NOT count NULL values, while SELECT/GROUP BY clauses roll up NULL values into one group.</p>
+<p>If we want to infer the number of disctinct entries from the results of a query using joins and GROUP BY clauses, remember to include an <code>IS NOT NULL</code> clause to ensure we ae not counting NULL valuse.</p>
+</blockquote>
+<ul>
+<li><code>HAVING</code></li>
+</ul>
+<p>The expression that follows a HAVING clause has to be applicable or computable using a group of data.</p>
+<h3 id="JOIN"><a href="#JOIN" class="headerlink" title="JOIN"></a>JOIN</h3><blockquote>
+<p>If we did not incldue the <code>WHERE</code> clause to combine two or more tables, sql would request a Caetesian product from datasets, and we could be waiting for our query for days(and will probally get in trouble with our database administrator)</p>
+<p><strong>ALWAYS remember to tell the database how to join our tables!</strong></p>
+</blockquote>
+<p><img src="/2017/10/01/7.2SQL笔记2/2.2JOIN.png" alt="JOIN"></p>
+<h5 id="The-general-strategy-relational-database-use-to-join-tables"><a href="#The-general-strategy-relational-database-use-to-join-tables" class="headerlink" title="The general strategy relational database use to join tables:"></a>The general strategy relational database use to join tables:</h5><p>  <img src="/2017/10/01/7.2SQL笔记2/2.3General_Strategy_of_Join_Table.png" alt="General Strategy of Join Table"> </p>
+<h5 id="Innter-JOIN"><a href="#Innter-JOIN" class="headerlink" title="Innter JOIN:"></a>Innter JOIN:</h5><p><img src="/2017/10/01/7.2SQL笔记2/2.4Inner_JOIN1.png" alt="Inner JOIN"></p>
+<p><img src="/2017/10/01/7.2SQL笔记2/2.4Inner_JOIN2.png" alt="Inner_JOIN2"></p>
+<h5 id="Left-JOIN"><a href="#Left-JOIN" class="headerlink" title="Left JOIN:"></a>Left JOIN:</h5><p><img src="/2017/10/01/7.2SQL笔记2/2.5Left_JOIN.png" alt="Left JOIN"></p>
+<h5 id="Distinguish-Between-theory-and-real-life"><a href="#Distinguish-Between-theory-and-real-life" class="headerlink" title="Distinguish Between theory and real life:"></a>Distinguish Between theory and real life:</h5><blockquote>
+<p>Database operations, like those that join tables, are based on <code>set</code>  theory that assumes there are no duplicate row in your tables. In real life, duplicate rows get enttered all the time, and it can cause you to misinterpret your queries if you do no understand the consequences.</p>
+</blockquote>
+<h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips:"></a>Tips:</h5><ul>
+<li>Avoid making assumptions about your data or your analyses. For example, rather than assume that all the values in a column are unique just because some documentation says they should be, check for yourself!</li>
+<li>Always look at example outputs of your queries before you strongly interpret aggregate calculations. Take extra care to do this when your queries require joins.</li>
+<li>When your queries require multiple layers of functions or joins, examine the output of each layer or join first before you combine them all together.</li>
+<li>Adopt a healthy skepticsm of all your data and results. If you see something you don’t expect, make sure you explore it before interpreting it strongly or incorporating it into other analyses.</li>
+</ul>
+<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>What is Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AVG()</td>
+<td>Column average</td>
+</tr>
+<tr>
+<td>COUNT()</td>
+<td># of rows in a column</td>
+</tr>
+<tr>
+<td>MAX()</td>
+<td>a column’s highest value</td>
+</tr>
+<tr>
+<td>MIN()</td>
+<td>a column’s lowest value</td>
+</tr>
+<tr>
+<td>SUM()</td>
+<td>sum of all a column’s values</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Three-Question-need-to-be-thinking-about"><a href="#Three-Question-need-to-be-thinking-about" class="headerlink" title="Three Question need to be thinking about"></a>Three Question need to be thinking about</h3><ul>
+<li>What questions will provide actionable insight?</li>
+<li>Will the answers to my questions matter</li>
+<li>Are the answers to my questions correct</li>
+</ul>
+<h3 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h3><p>-[ ] 1. Difference</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">return 20845 rows:</span><br><span class="line">1. <span class="keyword">SELECT</span> d.user_guid <span class="keyword">AS</span> UserID, d.dog_guid <span class="keyword">AS</span> DogID, d.breed, d.breed_type,</span><br><span class="line">ct.test_name</span><br><span class="line"><span class="keyword">FROM</span> dogs d, complete_tests ct</span><br><span class="line"><span class="keyword">WHERE</span> d.dog_guid=ct.dog_guid <span class="keyword">AND</span> ct.test_name=<span class="string">"Yawn Warm-up"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">17273</span> <span class="keyword">rows</span>:</span><br><span class="line"><span class="number">2.</span> <span class="keyword">SELECT</span> d.user_guid <span class="keyword">AS</span> UserID, d.dog_guid <span class="keyword">AS</span> DogID, d.breed, d.breed_type,</span><br><span class="line"><span class="keyword">COUNT</span>(ct.test_name)</span><br><span class="line"><span class="keyword">FROM</span> dogs d, complete_tests ct</span><br><span class="line"><span class="keyword">WHERE</span> d.dog_guid=ct.dog_guid <span class="keyword">AND</span> ct.test_name=<span class="string">"Yawn Warm-up"</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> DogID, d.breed, d.breed_type</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">16706</span> <span class="keyword">rows</span>:</span><br><span class="line"><span class="keyword">SELECT</span> d.user_guid <span class="keyword">AS</span> UserID, d.dog_guid <span class="keyword">AS</span> DogID, d.breed, d.breed_type,</span><br><span class="line"><span class="keyword">COUNT</span>(ct.test_name)</span><br><span class="line"><span class="keyword">FROM</span> dogs d, complete_tests ct</span><br><span class="line"><span class="keyword">WHERE</span> d.dog_guid=ct.dog_guid <span class="keyword">AND</span> ct.test_name=<span class="string">"Yawn Warm-up"</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> UserID, d.breed, d.breed_type</span><br></pre></td></tr></table></figure>
+<p>-[ ] 2. would be associated with ….<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%%sql</span><br><span class="line"><span class="keyword">SELECT</span> u.user_guid <span class="keyword">AS</span> uUserID, d.user_guid <span class="keyword">AS</span> dUserID, d.dog_guid <span class="keyword">AS</span> dDogID, d.breed, <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> Numrows</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">users</span> u <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> dogs d</span><br><span class="line"><span class="keyword">ON</span> u.user_guid=d.user_guid</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> u.user_guid</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">COUNT</span>(*) <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>This query told us that user ‘ce7b75bc-7144-11e5-ba71-058fbc01cf0b’ would be associated with 913,138 rows in the output of the outer join we designed! </p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/27/6.2ML笔记_Week2/" rel="next" title="Coursera_Machine Learning_Andrew Ng_Note week2">
+                <i class="fa fa-chevron-left"></i> Coursera_Machine Learning_Andrew Ng_Note week2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/03/7.3SQL笔记3/" rel="prev" title="Coursera_Managing Big Data with MySQL_Note 3">
+                Coursera_Managing Big Data with MySQL_Note 3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Yuan LIAO" />
+          <p class="site-author-name" itemprop="name">Yuan LIAO</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Query-Language"><span class="nav-number">1.</span> <span class="nav-text"><a href="#Data-Query-Language" class="headerlink" title="Data Query Language"></a>Data Query Language</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Six-SQL-Keywords"><span class="nav-number">2.</span> <span class="nav-text"><a href="#Six-SQL-Keywords" class="headerlink" title="Six SQL Keywords"></a>Six SQL Keywords</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Run-Order"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#Run-Order" class="headerlink" title="Run Order"></a>Run Order</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Operator"><span class="nav-number">3.</span> <span class="nav-text"><a href="#Operator" class="headerlink" title="Operator"></a>Operator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clause"><span class="nav-number">4.</span> <span class="nav-text"><a href="#Clause" class="headerlink" title="Clause"></a>Clause</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JOIN"><span class="nav-number">5.</span> <span class="nav-text"><a href="#JOIN" class="headerlink" title="JOIN"></a>JOIN</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#The-general-strategy-relational-database-use-to-join-tables"><span class="nav-number">5.0.1.</span> <span class="nav-text"><a href="#The-general-strategy-relational-database-use-to-join-tables" class="headerlink" title="The general strategy relational database use to join tables:"></a>The general strategy relational database use to join tables:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Innter-JOIN"><span class="nav-number">5.0.2.</span> <span class="nav-text"><a href="#Innter-JOIN" class="headerlink" title="Innter JOIN:"></a>Innter JOIN:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Left-JOIN"><span class="nav-number">5.0.3.</span> <span class="nav-text"><a href="#Left-JOIN" class="headerlink" title="Left JOIN:"></a>Left JOIN:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Distinguish-Between-theory-and-real-life"><span class="nav-number">5.0.4.</span> <span class="nav-text"><a href="#Distinguish-Between-theory-and-real-life" class="headerlink" title="Distinguish Between theory and real life:"></a>Distinguish Between theory and real life:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Tips"><span class="nav-number">5.0.5.</span> <span class="nav-text"><a href="#Tips" class="headerlink" title="Tips:"></a>Tips:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Function"><span class="nav-number">6.</span> <span class="nav-text"><a href="#Function" class="headerlink" title="Function"></a>Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Three-Question-need-to-be-thinking-about"><span class="nav-number">7.</span> <span class="nav-text"><a href="#Three-Question-need-to-be-thinking-about" class="headerlink" title="Three Question need to be thinking about"></a>Three Question need to be thinking about</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question"><span class="nav-number">8.</span> <span class="nav-text"><a href="#Question" class="headerlink" title="Question"></a>Question</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuan LIAO</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

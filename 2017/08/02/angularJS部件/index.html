@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="AngularJS1.x 数据绑定过程 – \$watch, \$apply, \$digest 笔记参考于翻译：理解\$watch ，\$apply 和 \$digest — 理解数据绑定过程 英语原文：Watch how the apply runs a digest  浏览器事件循环和Angular.js扩展​    我们的浏览器一直等待，比如用户交互。假如你点击一个按键或者在输入框里输入东">
+<meta name="description" content="AngularJS1.x 数据绑定过程 — $watch, $apply, $digest 笔记参考于翻译：理解$watch ，$apply 和 $digest —- 理解数据绑定过程 英语原文：Watch how the apply runs a digest  浏览器事件循环和Angular.js扩展​    我们的浏览器一直等待，比如用户交互。假如你点击一个按键或者在输入框里输入东西，事件的">
 <meta name="keywords" content="AngularJS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AngularJS1.x 部件">
 <meta property="og:url" content="//YuanLIAOcode.github.io/2017/08/02/angularJS部件/index.html">
 <meta property="og:site_name" content="Record My Life">
-<meta property="og:description" content="AngularJS1.x 数据绑定过程 – \$watch, \$apply, \$digest 笔记参考于翻译：理解\$watch ，\$apply 和 \$digest — 理解数据绑定过程 英语原文：Watch how the apply runs a digest  浏览器事件循环和Angular.js扩展​    我们的浏览器一直等待，比如用户交互。假如你点击一个按键或者在输入框里输入东">
+<meta property="og:description" content="AngularJS1.x 数据绑定过程 — $watch, $apply, $digest 笔记参考于翻译：理解$watch ，$apply 和 $digest —- 理解数据绑定过程 英语原文：Watch how the apply runs a digest  浏览器事件循环和Angular.js扩展​    我们的浏览器一直等待，比如用户交互。假如你点击一个按键或者在输入框里输入东西，事件的">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-12-06T20:41:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AngularJS1.x 部件">
-<meta name="twitter:description" content="AngularJS1.x 数据绑定过程 – \$watch, \$apply, \$digest 笔记参考于翻译：理解\$watch ，\$apply 和 \$digest — 理解数据绑定过程 英语原文：Watch how the apply runs a digest  浏览器事件循环和Angular.js扩展​    我们的浏览器一直等待，比如用户交互。假如你点击一个按键或者在输入框里输入东">
+<meta name="twitter:description" content="AngularJS1.x 数据绑定过程 — $watch, $apply, $digest 笔记参考于翻译：理解$watch ，$apply 和 $digest —- 理解数据绑定过程 英语原文：Watch how the apply runs a digest  浏览器事件循环和Angular.js扩展​    我们的浏览器一直等待，比如用户交互。假如你点击一个按键或者在输入框里输入东西，事件的">
 
 
 
@@ -330,8 +330,8 @@
       
 
       
-        <h2 id="AngularJS1-x-数据绑定过程-–-watch-apply-digest"><a href="#AngularJS1-x-数据绑定过程-–-watch-apply-digest" class="headerlink" title="AngularJS1.x 数据绑定过程 – \$watch, \$apply, \$digest"></a>AngularJS1.x 数据绑定过程 – \$watch, \$apply, \$digest</h2><blockquote>
-<p>笔记参考于翻译：<a href="http://www.angularjs.cn/A0a6" target="_blank" rel="noopener">理解\$watch ，\$apply 和 \$digest — 理解数据绑定过程</a></p>
+        <h2 id="AngularJS1-x-数据绑定过程-—-watch-apply-digest"><a href="#AngularJS1-x-数据绑定过程-—-watch-apply-digest" class="headerlink" title="AngularJS1.x 数据绑定过程 — $watch, $apply, $digest"></a>AngularJS1.x 数据绑定过程 — $watch, $apply, $digest</h2><blockquote>
+<p>笔记参考于翻译：<a href="http://www.angularjs.cn/A0a6" target="_blank" rel="noopener">理解$watch ，$apply 和 $digest —- 理解数据绑定过程</a></p>
 <p>英语原文：<a href="http://angular-tips.com/blog/2013/08/watch-how-the-apply-runs-a-digest/" target="_blank" rel="noopener">Watch how the apply runs a digest</a></p>
 </blockquote>
 <h3 id="浏览器事件循环和Angular-js扩展"><a href="#浏览器事件循环和Angular-js扩展" class="headerlink" title="浏览器事件循环和Angular.js扩展"></a>浏览器事件循环和Angular.js扩展</h3><p>​    我们的浏览器一直等待，比如用户交互。假如你点击一个按键或者在输入框里输入东西，事件的回调函数就会在javascript解释器里执行，然后你就可以做任何DOM操作，等回调函数执行完毕时，浏览器就会相应地对DOM做出变化。Angular拓展了这个事件循环，生成一个有时称为<code>angular context</code>的执行环境。</p>
@@ -339,7 +339,7 @@
 <p>记住<code>angualr context</code>这个重要的概念。其联系到接下来说的<code>$apply</code> ，<code>$digest</code>，<code>$watch</code> 的使用。</p>
 </blockquote>
 <a id="more"></a>
-<h4 id="1-watch队列-watch-list"><a href="#1-watch队列-watch-list" class="headerlink" title="1.$watch队列 (\$watch list)"></a>1.<code>$watch</code>队列 (\$watch list)</h4><p>​    每次你绑定一些东西到那你的UI上时，你就会往  \$watch 队列里插入一条<code>$watch</code>。想象一下<code>$watch</code>就是那个可以检测它所监视的model里有变化的时候的东西。</p>
+<h4 id="1-watch队列-watch-list"><a href="#1-watch队列-watch-list" class="headerlink" title="1.$watch队列 ($watch list)"></a>1.<code>$watch</code>队列 ($watch list)</h4><p>​    每次你绑定一些东西到那你的UI上时，你就会往  $watch 队列里插入一条<code>$watch</code>。想象一下<code>$watch</code>就是那个可以检测它所监视的model里有变化的时候的东西。</p>
 <blockquote>
 <p>只有绑定到UI后，才会生成一个<code>$watch</code></p>
 </blockquote>
@@ -520,7 +520,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -533,7 +533,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -568,7 +568,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AngularJS1-x-数据绑定过程-–-watch-apply-digest"><span class="nav-number">1.</span> <span class="nav-text"><a href="#AngularJS1-x-&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x8FC7;&#x7A0B;-&#x2013;-watch-apply-digest" class="headerlink" title="AngularJS1.x &#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x8FC7;&#x7A0B; &#x2013; \$watch, \$apply, \$digest"></a>AngularJS1.x &#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x8FC7;&#x7A0B; &#x2013; \$watch, \$apply, \$digest</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器事件循环和Angular-js扩展"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#&#x6D4F;&#x89C8;&#x5668;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x548C;Angular-js&#x6269;&#x5C55;" class="headerlink" title="&#x6D4F;&#x89C8;&#x5668;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x548C;Angular.js&#x6269;&#x5C55;"></a>&#x6D4F;&#x89C8;&#x5668;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x548C;Angular.js&#x6269;&#x5C55;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-watch队列-watch-list"><span class="nav-number">1.1.1.</span> <span class="nav-text"><a href="#1-watch&#x961F;&#x5217;-watch-list" class="headerlink" title="1.$watch&#x961F;&#x5217; (\$watch list)"></a>1.<code>$watch</code>&#x961F;&#x5217; (\$watch list)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-digest-循环"><span class="nav-number">1.1.2.</span> <span class="nav-text"><a href="#2-digest-&#x5FAA;&#x73AF;" class="headerlink" title="2. $digest &#x5FAA;&#x73AF;"></a>2. <code>$digest</code> &#x5FAA;&#x73AF;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-通过-apply来进入angualr-context"><span class="nav-number">1.1.3.</span> <span class="nav-text"><a href="#3-&#x901A;&#x8FC7;-apply&#x6765;&#x8FDB;&#x5165;angualr-context" class="headerlink" title="3. &#x901A;&#x8FC7;$apply&#x6765;&#x8FDB;&#x5165;angualr context"></a>3. &#x901A;&#x8FC7;<code>$apply</code>&#x6765;&#x8FDB;&#x5165;<code>angualr context</code></span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Controller-directive-model使用情况："><span class="nav-number">2.</span> <span class="nav-text"><a href="#Controller-directive-model&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF1A;" class="headerlink" title="Controller directive model&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF1A;"></a><code>Controller</code> <code>directive</code> <code>model</code>&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF1A;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Angular-JS-之-Factory-VS-Service-VS-Provider"><span class="nav-number">3.</span> <span class="nav-text"><a href="#Angular-JS-&#x4E4B;-Factory-VS-Service-VS-Provider" class="headerlink" title="Angular JS &#x4E4B; Factory VS Service VS Provider"></a>Angular JS &#x4E4B; Factory VS Service VS Provider</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#简而言之："><span class="nav-number">3.0.0.1.</span> <span class="nav-text"><a href="#&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF1A;" class="headerlink" title="&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF1A;"></a>&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF1A;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#详细的比较："><span class="nav-number">3.0.0.2.</span> <span class="nav-text"><a href="#&#x8BE6;&#x7EC6;&#x7684;&#x6BD4;&#x8F83;&#xFF1A;" class="headerlink" title="&#x8BE6;&#x7EC6;&#x7684;&#x6BD4;&#x8F83;&#xFF1A;"></a>&#x8BE6;&#x7EC6;&#x7684;&#x6BD4;&#x8F83;&#xFF1A;</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AngularJS1-x-数据绑定过程-—-watch-apply-digest"><span class="nav-number">1.</span> <span class="nav-text"><a href="#AngularJS1-x-&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x8FC7;&#x7A0B;-&#x2014;-watch-apply-digest" class="headerlink" title="AngularJS1.x &#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x8FC7;&#x7A0B; &#x2014; $watch, $apply, $digest"></a>AngularJS1.x &#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x8FC7;&#x7A0B; &#x2014; $watch, $apply, $digest</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器事件循环和Angular-js扩展"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#&#x6D4F;&#x89C8;&#x5668;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x548C;Angular-js&#x6269;&#x5C55;" class="headerlink" title="&#x6D4F;&#x89C8;&#x5668;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x548C;Angular.js&#x6269;&#x5C55;"></a>&#x6D4F;&#x89C8;&#x5668;&#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x548C;Angular.js&#x6269;&#x5C55;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-watch队列-watch-list"><span class="nav-number">1.1.1.</span> <span class="nav-text"><a href="#1-watch&#x961F;&#x5217;-watch-list" class="headerlink" title="1.$watch&#x961F;&#x5217; ($watch list)"></a>1.<code>$watch</code>&#x961F;&#x5217; ($watch list)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-digest-循环"><span class="nav-number">1.1.2.</span> <span class="nav-text"><a href="#2-digest-&#x5FAA;&#x73AF;" class="headerlink" title="2. $digest &#x5FAA;&#x73AF;"></a>2. <code>$digest</code> &#x5FAA;&#x73AF;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-通过-apply来进入angualr-context"><span class="nav-number">1.1.3.</span> <span class="nav-text"><a href="#3-&#x901A;&#x8FC7;-apply&#x6765;&#x8FDB;&#x5165;angualr-context" class="headerlink" title="3. &#x901A;&#x8FC7;$apply&#x6765;&#x8FDB;&#x5165;angualr context"></a>3. &#x901A;&#x8FC7;<code>$apply</code>&#x6765;&#x8FDB;&#x5165;<code>angualr context</code></span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Controller-directive-model使用情况："><span class="nav-number">2.</span> <span class="nav-text"><a href="#Controller-directive-model&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF1A;" class="headerlink" title="Controller directive model&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF1A;"></a><code>Controller</code> <code>directive</code> <code>model</code>&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF1A;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Angular-JS-之-Factory-VS-Service-VS-Provider"><span class="nav-number">3.</span> <span class="nav-text"><a href="#Angular-JS-&#x4E4B;-Factory-VS-Service-VS-Provider" class="headerlink" title="Angular JS &#x4E4B; Factory VS Service VS Provider"></a>Angular JS &#x4E4B; Factory VS Service VS Provider</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#简而言之："><span class="nav-number">3.0.0.1.</span> <span class="nav-text"><a href="#&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF1A;" class="headerlink" title="&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF1A;"></a>&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF1A;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#详细的比较："><span class="nav-number">3.0.0.2.</span> <span class="nav-text"><a href="#&#x8BE6;&#x7EC6;&#x7684;&#x6BD4;&#x8F83;&#xFF1A;" class="headerlink" title="&#x8BE6;&#x7EC6;&#x7684;&#x6BD4;&#x8F83;&#xFF1A;"></a>&#x8BE6;&#x7EC6;&#x7684;&#x6BD4;&#x8F83;&#xFF1A;</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>

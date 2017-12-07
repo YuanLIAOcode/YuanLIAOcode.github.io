@@ -1,0 +1,836 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MySQL,ER diagrams,Relational Schemas," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Reference Course: Managing Big Data with MySQL in CourseraRemember: when you complete this course you will have marketable skills with big data analysis in SQL! The benefits you will be well worth yo">
+<meta name="keywords" content="MySQL,ER diagrams,Relational Schemas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Coursera_Managing Big Data with MySQL_Note 1">
+<meta property="og:url" content="//YuanLIAOcode.github.io/2017/09/23/7.1SQL笔记1/index.html">
+<meta property="og:site_name" content="Record My Life">
+<meta property="og:description" content="Reference Course: Managing Big Data with MySQL in CourseraRemember: when you complete this course you will have marketable skills with big data analysis in SQL! The benefits you will be well worth yo">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/23/7.1SQL笔记1/1.1cardinality_constrains_example.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/23/7.1SQL笔记1/1.2weak_entity_and_partial_key.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/23/7.1SQL笔记1/1.3student_achieves_completion_contains_class.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/23/7.1SQL笔记1/1.4Techinical_Terms.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/23/7.1SQL笔记1/1.4Techinical_Terms2.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/23/7.1SQL笔记1/1.5Weak_Entity_represented_in_a_Relational_Schema.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/23/7.1SQL笔记1/1.6One_to_Many_Relationships.png">
+<meta property="og:image" content="//yuanliaocode.github.io/2017/09/23/7.1SQL笔记1/1.7Many_to_Many_Relationships.png">
+<meta property="og:updated_time" content="2017-12-07T13:00:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Coursera_Managing Big Data with MySQL_Note 1">
+<meta name="twitter:description" content="Reference Course: Managing Big Data with MySQL in CourseraRemember: when you complete this course you will have marketable skills with big data analysis in SQL! The benefits you will be well worth yo">
+<meta name="twitter:image" content="//yuanliaocode.github.io/2017/09/23/7.1SQL笔记1/1.1cardinality_constrains_example.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="//YuanLIAOcode.github.io/2017/09/23/7.1SQL笔记1/"/>
+
+
+
+
+
+  <title>Coursera_Managing Big Data with MySQL_Note 1 | Record My Life</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-102582468-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Record My Life</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="//YuanLIAOcode.github.io/2017/09/23/7.1SQL笔记1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuan LIAO">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Record My Life">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Coursera_Managing Big Data with MySQL_Note 1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-23T13:14:07+02:00">
+                2017-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Reference Course: <a href="https://www.coursera.org/learn/analytics-mysql" target="_blank" rel="noopener">Managing Big Data with MySQL</a> in Coursera<br>Remember: when you complete this course you will have marketable skills with big data analysis in SQL! The benefits you will be well worth your time and effort!</p>
+</blockquote>
+<h3 id="Entity-Relationship-Diagrams-ER-diagrams"><a href="#Entity-Relationship-Diagrams-ER-diagrams" class="headerlink" title="Entity-Relationship Diagrams(ER diagrams)"></a>Entity-Relationship Diagrams(ER diagrams)</h3><h4 id="Terminology"><a href="#Terminology" class="headerlink" title="Terminology:"></a>Terminology:</h4><ul>
+<li><p>Entity Instance:<br>A single occurrence of an entity type. In a table it would look like <code>a row</code></p>
+</li>
+<li><p>Unique Attribute (normally used as unique key)<br>An attribute with a unique value in each entity instance. In a table it would look like <code>the column that allows you to link tables together</code>. </p>
+<blockquote>
+<p>There could be many unique attributes in an entity of a ER diagram</p>
+</blockquote>
+</li>
+</ul>
+<a id="more"></a>
+<h4 id="Simple-Notation"><a href="#Simple-Notation" class="headerlink" title="Simple Notation:"></a>Simple Notation:</h4><h5 id="Rectangle-Box-Entity"><a href="#Rectangle-Box-Entity" class="headerlink" title="Rectangle Box : Entity"></a>Rectangle Box : Entity</h5><blockquote>
+<ol>
+<li>Represent category of data your database will keep track of. </li>
+<li>Each box is a category. </li>
+<li>Entity will probably  become a table when the database is made</li>
+<li>Every entity must have at least one attribute that serves as a unique key</li>
+</ol>
+</blockquote>
+<h5 id="Oval-Box-Attribute"><a href="#Oval-Box-Attribute" class="headerlink" title="Oval Box: Attribute"></a>Oval Box: Attribute</h5><blockquote>
+<ol>
+<li>Represent aspects of each category or entity that will be recorded.</li>
+<li>Attribute will likely become the columns in the table that will be built around that entity.</li>
+<li>According to the rules of set theory, each attribute must be unique for that entity</li>
+</ol>
+</blockquote>
+<p>Every entity or catrgory has to be related to at least one other entity in the database.</p>
+<h5 id="Diamond-and-lines-Relationship"><a href="#Diamond-and-lines-Relationship" class="headerlink" title="Diamond and lines: Relationship"></a>Diamond and lines: Relationship</h5><blockquote>
+<ol>
+<li>The word in the diamond spells out the nature of the relationship. For example: <code>STUDENT attend COLLEGE</code></li>
+</ol>
+</blockquote>
+<h5 id="Cardinality-Constrains"><a href="#Cardinality-Constrains" class="headerlink" title="Cardinality Constrains"></a>Cardinality Constrains</h5><blockquote>
+<p><code>|</code>: One<br><code>&lt;-</code>: Many</p>
+<p><img src="/2017/09/23/7.1SQL笔记1/1.1cardinality_constrains_example.png" alt="Cardinality Constrains Example"></p>
+</blockquote>
+<h4 id="Complex-Notation"><a href="#Complex-Notation" class="headerlink" title="Complex Notation:"></a>Complex Notation:</h4><h5 id="A-attribute-is-in-parenthese-e-g-ClassroomID-Composite-Attribute"><a href="#A-attribute-is-in-parenthese-e-g-ClassroomID-Composite-Attribute" class="headerlink" title="A attribute is in parenthese: ( e.g (ClassroomID) ) Composite Attribute"></a>A attribute is in parenthese: ( e.g <u><code>(ClassroomID)</code></u> ) Composite Attribute</h5><blockquote>
+<ol>
+<li>Composite attributea are measurements or descriptions that have important meaning that can be created by combing other attributes being tracked and saved.</li>
+<li>To save space, compostite attributes are usually not made into their own columns in a database.</li>
+<li>Composite attribute works only when all the sub-attributes linked to the composite are joined together. Even misses one sub-attribute that this compsite won’t work.</li>
+</ol>
+</blockquote>
+<h5 id="Double-Rectangle-Weak-Entity"><a href="#Double-Rectangle-Weak-Entity" class="headerlink" title="Double Rectangle: Weak Entity"></a>Double Rectangle: Weak Entity</h5><h5 id="Attribute-is-underlined-with-a-dash-line-Partial-Key"><a href="#Attribute-is-underlined-with-a-dash-line-Partial-Key" class="headerlink" title="Attribute is underlined with a dash line: Partial Key"></a>Attribute is underlined with a dash line: Partial Key</h5><blockquote>
+<ol>
+<li>Normally, this attribute in the database on its own will not identify an entity(not a unique key)</li>
+<li>Nontheless, a partial key can become unique in it’s own <code>weak entiry</code> if, and only if, it is connect to the unique key of the entity it is connected to with a double diamond.</li>
+</ol>
+</blockquote>
+<p><img src="/2017/09/23/7.1SQL笔记1/1.2weak_entity_and_partial_key.png" alt="Weak Entity and partial Key"></p>
+<h5 id="Double-Oval-Mulitivalued-Attributes"><a href="#Double-Oval-Mulitivalued-Attributes" class="headerlink" title="Double Oval: Mulitivalued Attributes"></a>Double Oval: Mulitivalued Attributes</h5><p>Multivalued attributes are depicted by a double line around the oval of an attributes.</p>
+<blockquote>
+<p>“Multivalued” attributes are used when an entity can have multiple values for the same attribute.</p>
+</blockquote>
+<h4 id="Example-Student-achieves-Completion-contains-Class"><a href="#Example-Student-achieves-Completion-contains-Class" class="headerlink" title="Example: Student achieves Completion contains Class"></a>Example: <code>Student achieves Completion contains Class</code></h4><p><img src="/2017/09/23/7.1SQL笔记1/1.3student_achieves_completion_contains_class.png" alt="Student achieves Completion contains Class"></p>
+<blockquote>
+<p>Explanation:</p>
+<p>In general, we can see that students are taking a bunch of classes, but studnet names can’t be connected directed with class levels or ID in this data, despite the fact that both students and class have a unique attribute. </p>
+<p>Apparently, the only way they can be connected is if we combine them via the semester the class was taken. What that means is that student can take the same class multiple times.</p>
+<p>If we want to analyze data about studnets and class, we would have to combine not two tables, but three tables to get the data we want. Further, since <code>Completion</code> is a week entity, when we actually write the queries, we would have to make sure specified both the partial key and the unqiue keys when we try to joun the tables.</p>
+</blockquote>
+<h3 id="Relational-Schemas"><a href="#Relational-Schemas" class="headerlink" title="Relational Schemas"></a>Relational Schemas</h3><p>Critical Components of a Relational Schema:</p>
+<ul>
+<li>Tables</li>
+<li>Primary keys</li>
+<li>Foreign Keys</li>
+</ul>
+<h4 id="Techinical-Terms"><a href="#Techinical-Terms" class="headerlink" title="Techinical Terms:"></a>Techinical Terms:</h4><p><img src="/2017/09/23/7.1SQL笔记1/1.4Techinical_Terms.png" alt="Techinical Terms"></p>
+<p><img src="/2017/09/23/7.1SQL笔记1/1.4Techinical_Terms2.png" alt="Techinical Terms"></p>
+<h4 id="PK-Primary-key"><a href="#PK-Primary-key" class="headerlink" title="(PK) : Primary key:"></a>(PK) : Primary key:</h4><ul>
+<li><strong>Only 1 column per table can be a primary key</strong>. (unless multiple columns are needed to identify each row, for example a mapping table of a <code>many to many relationship</code>). </li>
+<li>Primary keys cannot have null values.</li>
+</ul>
+<blockquote>
+<p>The critical difference between the <code>ER diagrams</code> and a <code>relational schemaa</code>, though is that although we were supposed to underline all unique attributes in the ER diagrams, only one unique column in a table of a relational schema or database can be labelled as a <code>primary key</code>. </p>
+<p>The only exception is if we need multiple columns to make each row in a table unique.</p>
+<p>The reason we only have one primary key, is that the database software uses the primary key in special ways to ensure data integrity. To maintain this integrity, primary keys are configured so that they cannot contain any missing values.</p>
+</blockquote>
+<h4 id="U-Unique-column"><a href="#U-Unique-column" class="headerlink" title="(U) : Unique column"></a>(U) : Unique column</h4><blockquote>
+<p>To help us with these links it is useful to mark unique columns in our schema with a U next to their colum titles so that we know which ones can be use to link tables in our queries.</p>
+</blockquote>
+<h4 id="FK-Foreign-Key"><a href="#FK-Foreign-Key" class="headerlink" title="(FK) : Foreign Key"></a>(FK) : Foreign Key</h4><p>Foreign keys are used to link tables to other tables. They complish this by having values that refer to unique IDs and other tables.</p>
+<blockquote>
+<ol>
+<li>We indicate foreign keys in relational schemas by drawing arrows from foreign key in one table to the primary key it refers to in another table. </li>
+<li>The arrow goes from the table that has a foreign key to the table where the key comes from (so the arrow points to the primary key)</li>
+<li><code>Foreign keys</code> and <code>unique keys</code> do not have to have the same name. But we should at least make the names seem similar as a good database designer.</li>
+</ol>
+</blockquote>
+<h4 id="Weak-Entity-represented-in-a-Relational-Schema"><a href="#Weak-Entity-represented-in-a-Relational-Schema" class="headerlink" title="Weak Entity represented in a Relational Schema"></a>Weak Entity represented in a Relational Schema</h4><ul>
+<li>Example: </li>
+</ul>
+<blockquote>
+<p>Each apartment is uniquely identified by a combination of the apartment number in the apartment table with the building ID in the building table. </p>
+<p>We can discern this from the fact that both apartment ID and building ID are underlined in the apartment table, and that in addition builidng ID in this table is a foreign key to the building table.</p>
+</blockquote>
+<p><img src="/2017/09/23/7.1SQL笔记1/1.5Weak_Entity_represented_in_a_Relational_Schema.png" alt="Weak Entity represented in a Relational Schema"></p>
+<h4 id="One-to-Many-Relationships"><a href="#One-to-Many-Relationships" class="headerlink" title="One to Many Relationships"></a>One to Many Relationships</h4><blockquote>
+<p>Whenever we have a <code>1:Many</code> relationship, the relation mapped from the entiry on <strong>the Many side</strong> of the relationship shoule get a foreign key that corresponds to the primary key of the relation on the 1 side of the relationship. </p>
+<p>This is because we would have to have duplicate values of the unique indentifier of the entity on the 1 side in the table that represents the entity on the <code>Many side</code></p>
+</blockquote>
+<p><img src="/2017/09/23/7.1SQL笔记1/1.6One_to_Many_Relationships.png" alt="One to Many Relationships"></p>
+<blockquote>
+<p>A customer could have many phone numbers, but normally each phone number only corresponds one customer(except situations like a couple, family or somehting like that…)</p>
+</blockquote>
+<h4 id="Many-to-Many-Relationships"><a href="#Many-to-Many-Relationships" class="headerlink" title="Many to Many Relationships"></a>Many to Many Relationships</h4><ul>
+<li>Example</li>
+</ul>
+<p>It has a table called enrolled in that only has foreign keys as attributes.</p>
+<blockquote>
+<p>This type of mapping table has to be implemented when the entities in the corresponding ER diagram have what is called a many to many relationship.</p>
+</blockquote>
+<p><img src="/2017/09/23/7.1SQL笔记1/1.7Many_to_Many_Relationships.png" alt="Many to Many Relationships"></p>
+<blockquote>
+<p>Under these circumstances there is no way to follow the rule that primary keys mush not be duplicated and still included a foreign key in the same table as the primary key.</p>
+<p>Therefore, a mapping table has nothing but one composite primary keys in it. Whenever we see a maping table like this in a database, it’s a clue of the columns in the tables that links up can have multiple instances of one another.</p>
+</blockquote>
+<h3 id="Question"><a href="#Question" class="headerlink" title="Question:"></a>Question:</h3><p>-[ ] 1. For relational databases to work most efficiently, which of the following requirements of set theory should be followed? Check all that apply. (Note that you will need to select more than one correct response to answer this question correctly.)</p>
+<h3 id="Funny-Time"><a href="#Funny-Time" class="headerlink" title="Funny Time"></a>Funny Time</h3><blockquote>
+<p>Never ask a database administrator to help you move the furniture. They always seem to be dropping tables.</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+            <a href="/tags/ER-diagrams/" rel="tag"># ER diagrams</a>
+          
+            <a href="/tags/Relational-Schemas/" rel="tag"># Relational Schemas</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/20/6.1ML笔记_Week1/" rel="next" title="Coursera Ng Adrew Machine Learning_Note week1">
+                <i class="fa fa-chevron-left"></i> Coursera Ng Adrew Machine Learning_Note week1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/27/6.2ML笔记_Week2/" rel="prev" title="Coursera_Machine Learning_Andrew Ng_Note week2">
+                Coursera_Machine Learning_Andrew Ng_Note week2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Yuan LIAO" />
+          <p class="site-author-name" itemprop="name">Yuan LIAO</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Entity-Relationship-Diagrams-ER-diagrams"><span class="nav-number">1.</span> <span class="nav-text"><a href="#Entity-Relationship-Diagrams-ER-diagrams" class="headerlink" title="Entity-Relationship Diagrams(ER diagrams)"></a>Entity-Relationship Diagrams(ER diagrams)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Terminology"><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#Terminology" class="headerlink" title="Terminology:"></a>Terminology:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Simple-Notation"><span class="nav-number">1.2.</span> <span class="nav-text"><a href="#Simple-Notation" class="headerlink" title="Simple Notation:"></a>Simple Notation:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Rectangle-Box-Entity"><span class="nav-number">1.2.1.</span> <span class="nav-text"><a href="#Rectangle-Box-Entity" class="headerlink" title="Rectangle Box : Entity"></a>Rectangle Box : Entity</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Oval-Box-Attribute"><span class="nav-number">1.2.2.</span> <span class="nav-text"><a href="#Oval-Box-Attribute" class="headerlink" title="Oval Box: Attribute"></a>Oval Box: Attribute</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Diamond-and-lines-Relationship"><span class="nav-number">1.2.3.</span> <span class="nav-text"><a href="#Diamond-and-lines-Relationship" class="headerlink" title="Diamond and lines: Relationship"></a>Diamond and lines: Relationship</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Cardinality-Constrains"><span class="nav-number">1.2.4.</span> <span class="nav-text"><a href="#Cardinality-Constrains" class="headerlink" title="Cardinality Constrains"></a>Cardinality Constrains</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Complex-Notation"><span class="nav-number">1.3.</span> <span class="nav-text"><a href="#Complex-Notation" class="headerlink" title="Complex Notation:"></a>Complex Notation:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-attribute-is-in-parenthese-e-g-ClassroomID-Composite-Attribute"><span class="nav-number">1.3.1.</span> <span class="nav-text"><a href="#A-attribute-is-in-parenthese-e-g-ClassroomID-Composite-Attribute" class="headerlink" title="A attribute is in parenthese: ( e.g (ClassroomID) ) Composite Attribute"></a>A attribute is in parenthese: ( e.g <u><code>(ClassroomID)</code></u> ) Composite Attribute</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Double-Rectangle-Weak-Entity"><span class="nav-number">1.3.2.</span> <span class="nav-text"><a href="#Double-Rectangle-Weak-Entity" class="headerlink" title="Double Rectangle: Weak Entity"></a>Double Rectangle: Weak Entity</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Attribute-is-underlined-with-a-dash-line-Partial-Key"><span class="nav-number">1.3.3.</span> <span class="nav-text"><a href="#Attribute-is-underlined-with-a-dash-line-Partial-Key" class="headerlink" title="Attribute is underlined with a dash line: Partial Key"></a>Attribute is underlined with a dash line: Partial Key</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Double-Oval-Mulitivalued-Attributes"><span class="nav-number">1.3.4.</span> <span class="nav-text"><a href="#Double-Oval-Mulitivalued-Attributes" class="headerlink" title="Double Oval: Mulitivalued Attributes"></a>Double Oval: Mulitivalued Attributes</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Example-Student-achieves-Completion-contains-Class"><span class="nav-number">1.4.</span> <span class="nav-text"><a href="#Example-Student-achieves-Completion-contains-Class" class="headerlink" title="Example: Student achieves Completion contains Class"></a>Example: <code>Student achieves Completion contains Class</code></span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Relational-Schemas"><span class="nav-number">2.</span> <span class="nav-text"><a href="#Relational-Schemas" class="headerlink" title="Relational Schemas"></a>Relational Schemas</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Techinical-Terms"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#Techinical-Terms" class="headerlink" title="Techinical Terms:"></a>Techinical Terms:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PK-Primary-key"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#PK-Primary-key" class="headerlink" title="(PK) : Primary key:"></a>(PK) : Primary key:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#U-Unique-column"><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#U-Unique-column" class="headerlink" title="(U) : Unique column"></a>(U) : Unique column</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FK-Foreign-Key"><span class="nav-number">2.4.</span> <span class="nav-text"><a href="#FK-Foreign-Key" class="headerlink" title="(FK) : Foreign Key"></a>(FK) : Foreign Key</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Weak-Entity-represented-in-a-Relational-Schema"><span class="nav-number">2.5.</span> <span class="nav-text"><a href="#Weak-Entity-represented-in-a-Relational-Schema" class="headerlink" title="Weak Entity represented in a Relational Schema"></a>Weak Entity represented in a Relational Schema</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#One-to-Many-Relationships"><span class="nav-number">2.6.</span> <span class="nav-text"><a href="#One-to-Many-Relationships" class="headerlink" title="One to Many Relationships"></a>One to Many Relationships</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Many-to-Many-Relationships"><span class="nav-number">2.7.</span> <span class="nav-text"><a href="#Many-to-Many-Relationships" class="headerlink" title="Many to Many Relationships"></a>Many to Many Relationships</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question"><span class="nav-number">3.</span> <span class="nav-text"><a href="#Question" class="headerlink" title="Question:"></a>Question:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Funny-Time"><span class="nav-number">4.</span> <span class="nav-text"><a href="#Funny-Time" class="headerlink" title="Funny Time"></a>Funny Time</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuan LIAO</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
