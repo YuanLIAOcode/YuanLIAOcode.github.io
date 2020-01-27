@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="AngularJS,">
+  <meta name="keywords" content="MySQL,Teradta,">
 
 
 
@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="Angular JS 模块的概念和依赖注入分析 部分英文参考: Understanding Dependency Injection部分中文参考：Angualr JS 模块化与依赖注入 Angular JS 使用模块化的组织方式，和依赖注入的设计。这使得模块之间耦合度较低，模块更容易复用，同时支持声明式的编程风格。">
-<meta name="keywords" content="AngularJS">
+<meta name="description" content="Teradata Get a list of columns in a table  1HELP TABLE + Table_Name;  Same function in MySQL, using SHOW or DESCRIBE  Get information about a single column in a table   1HELP COLUMN + Column_Name;">
+<meta name="keywords" content="MySQL,Teradta">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AngularJS 依赖注入">
-<meta property="og:url" content="//YuanLIAOcode.github.io/2017/09/01/5AngularJS 依赖注入/index.html">
+<meta property="og:title" content="Coursera_Managing Big Data with MySQL_Note Teradata">
+<meta property="og:url" content="//YuanLIAOcode.github.io/2017/10/09/7.4Teradata笔记/index.html">
 <meta property="og:site_name" content="Record My Life">
-<meta property="og:description" content="Angular JS 模块的概念和依赖注入分析 部分英文参考: Understanding Dependency Injection部分中文参考：Angualr JS 模块化与依赖注入 Angular JS 使用模块化的组织方式，和依赖注入的设计。这使得模块之间耦合度较低，模块更容易复用，同时支持声明式的编程风格。">
+<meta property="og:description" content="Teradata Get a list of columns in a table  1HELP TABLE + Table_Name;  Same function in MySQL, using SHOW or DESCRIBE  Get information about a single column in a table   1HELP COLUMN + Column_Name;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-06T20:56:11.000Z">
+<meta property="og:updated_time" content="2017-12-07T13:05:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AngularJS 依赖注入">
-<meta name="twitter:description" content="Angular JS 模块的概念和依赖注入分析 部分英文参考: Understanding Dependency Injection部分中文参考：Angualr JS 模块化与依赖注入 Angular JS 使用模块化的组织方式，和依赖注入的设计。这使得模块之间耦合度较低，模块更容易复用，同时支持声明式的编程风格。">
+<meta name="twitter:title" content="Coursera_Managing Big Data with MySQL_Note Teradata">
+<meta name="twitter:description" content="Teradata Get a list of columns in a table  1HELP TABLE + Table_Name;  Same function in MySQL, using SHOW or DESCRIBE  Get information about a single column in a table   1HELP COLUMN + Column_Name;">
 
 
 
@@ -132,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="//YuanLIAOcode.github.io/2017/09/01/5AngularJS 依赖注入/">
+  <link rel="canonical" href="//YuanLIAOcode.github.io/2017/10/09/7.4Teradata笔记/">
 
 
 
 
 
-  <title>AngularJS 依赖注入 | Record My Life</title>
+  <title>Coursera_Managing Big Data with MySQL_Note Teradata | Record My Life</title>
   
 
 
@@ -266,7 +266,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="//YuanLIAOcode.github.io/2017/09/01/5AngularJS 依赖注入/">
+    <link itemprop="mainEntityOfPage" href="//YuanLIAOcode.github.io/2017/10/09/7.4Teradata笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yuan LIAO">
@@ -283,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AngularJS 依赖注入</h1>
+          <h1 class="post-title" itemprop="name headline">Coursera_Managing Big Data with MySQL_Note Teradata</h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-01T17:41:12+08:00">
-                2017-09-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-09T21:17:30+08:00">
+                2017-10-09
               </time>
             
 
@@ -330,38 +330,54 @@
       
 
       
-        <h2 id="Angular-JS-模块的概念和依赖注入分析"><a href="#Angular-JS-模块的概念和依赖注入分析" class="headerlink" title="Angular JS 模块的概念和依赖注入分析"></a>Angular JS 模块的概念和依赖注入分析</h2><blockquote>
-<p>部分英文参考: <a href="https://github.com/angular/angular.js/wiki/Understanding-Dependency-Injection" target="_blank" rel="noopener">Understanding Dependency Injection</a><br>部分中文参考：<a href="http://harttle.com/2015/06/07/angular-module.html" target="_blank" rel="noopener">Angualr JS 模块化与依赖注入</a></p>
-<p>Angular JS 使用模块化的组织方式，和依赖注入的设计。这使得模块之间耦合度较低，模块更容易复用，同时支持声明式的编程风格。</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="模块概念"><a href="#模块概念" class="headerlink" title="模块概念"></a>模块概念</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'(这里声明模块的名字)'</span>, [<span class="string">'(这里列出该模块所依赖的其它模块的名字'</span>, <span class="string">''</span>..])</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Module 依赖： 在声明一个模块时，需要给出依赖模块的列表。同时这些模块对应的JS需要在HTML中加以引入。一个模块中，默认引入了 Service, Directive 和 Filter模块。</p>
-</blockquote>
-<ul>
-<li>区分Module依赖和Service依赖:<br>​    在声明Controller, Service, Directive 和 Filter的工厂方法中，把依赖的Service直接放到参数列表中，Angular 的 <code>$injector</code> 会自动注入生成这些Service。</li>
+        <h3 id="Teradata"><a href="#Teradata" class="headerlink" title="Teradata"></a>Teradata</h3><ul>
+<li>Get a list of columns in a table</li>
 </ul>
-<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><p>​    在Angular中， Directive, Service, Filter, Controller都是以工厂法的方式给出，而工厂方法的参数名对应着（与其相同）该工厂方法所依赖的Service。</p>
-<p>​    以Controller为例，有两种声明方式:</p>
-<ol>
-<li><p>不使用字符串数组</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'aCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $http</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//some code</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p> 在上述的<code>function</code>执行之间，Angualr <code>$injectro</code> 会生成一个 <code>scope</code> 实例和 <code>$http</code> 实例，并传入该方法。如果你希望对JS进行压缩处理，那么参数名称可能会发生变化，Angular的 <code>$injector</code> 则不能正确地把这个控制器所依赖的Service注入</p>
-</li>
-<li><p>使用字符串数组的形式来声明依赖项。(字符串常量不会被压缩) ：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">'aCtrl'</span>, [<span class="string">'$scope'</span>, <span class="string">'$http'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $http</span>)</span>&#123;</span><br><span class="line">  <span class="comment">//some code</span></span><br><span class="line">&#125;])</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>另外，还可以同时设置 <code>$injector</code> 来显示地声明所依赖的Service:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> worldCtrl = <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $http</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// some code</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">worldCtrl.$inject = [<span class="string">'$scope'</span>, <span class="string">'http'</span>];</span><br><span class="line">app.controller(<span class="string">'worldCtrl'</span>, worldCtrl);</span><br></pre></td></tr></table></figure></p>
-<p>  <code>constant</code>方法<br>​    </p>
-<h3 id="注入器-injector"><a href="#注入器-injector" class="headerlink" title="注入器($injector)"></a>注入器($injector)</h3><pre><code>注入器负责
-每个Angular JS应用都有唯一一个`$injector`，当应用启动的时就会生成一个，你可以通过将 `$inject` 注入到任何可以注入函数中来得到它 (`$inject` 知道如何注入它自己)
-</code></pre><blockquote>
-<p>我们不能在 <code>constant</code> 和 <code>value</code> 中注入任何东西。因为 <code>constant</code> 和 <code>value</code> 总是返回一个静态值，它们不会被注入器调用。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">HELP</span> <span class="keyword">TABLE</span> + Table_Name;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Same function in MySQL, using SHOW or DESCRIBE</p>
+<ul>
+<li>Get information about a single column in a table</li>
+</ul>
 </blockquote>
-<h3 id="控制器-controller"><a href="#控制器-controller" class="headerlink" title="控制器($controller)"></a>控制器($controller)</h3><pre><code>控制器可以被注入，但是控制器本身是不能被注入到任何东西里去的。这是因为控制器不是通过Provider创建的。但Angular JS内部有一个` $controller` 服务器，用来负责初始化你的控制器。比如说，当你调用 `myMod.controller(...)` 这个控制器时，其实我们在访问这个服务器的provider。
-</code></pre>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">HELP</span> <span class="keyword">COLUMN</span> + Column_Name;</span><br></pre></td></tr></table></figure>
+ <a id="more"></a>
+<p>Most of the synatx we used to look at our data in <strong>Teradata</strong> is the same we use in <strong>MySQL.</strong></p>
+<ul>
+<li>Get information whether or not a column is a primary or foreign key</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">table</span> + Table_Name</span><br></pre></td></tr></table></figure>
+<h4 id="Operator"><a href="#Operator" class="headerlink" title="Operator"></a>Operator</h4><ul>
+<li><code>TOP</code> </li>
+</ul>
+<p>Terdata uses a <code>TOP</code> operator instead of a <code>LIMIT</code> operator to restrict the length of a query output.<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">10</span> *</span><br><span class="line"><span class="keyword">FROM</span> strinfo</span><br></pre></td></tr></table></figure></p>
+<h4 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h4><ul>
+<li><code>SAMPLE</code></li>
+</ul>
+<p>The <code>SAMPLE</code> function allows we to select a random sampling of the data in a table.</p>
+<ol>
+<li>The following query would retrieve 10 random rows from the strinfo table:</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> strinfo</span><br><span class="line"><span class="keyword">SAMPLE</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>The following query would retrieve a random 10% of the rows from the strinfo table:</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> strinfo</span><br><span class="line"><span class="keyword">SAMPLE</span> <span class="number">.10</span></span><br></pre></td></tr></table></figure>
+<h3 id="The-Other-important-differences-between-MySQL-and-Teradata"><a href="#The-Other-important-differences-between-MySQL-and-Teradata" class="headerlink" title="The Other important differences between MySQL and Teradata"></a>The Other important differences between <code>MySQL</code> and <code>Teradata</code></h3><h4 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h4><ul>
+<li><p>DISTINCT and LIMIT can be used in the same query statement in MySQL, but <strong>DISTINCT and TOP cannot be used together in Teradata</strong></p>
+</li>
+<li><p>MySQL accepts either double or single quotation marks around strings of text in queries, <strong>but Teradata will only accept single quotation marks</strong></p>
+</li>
+<li><p>MySQL will accept the symbols “!=” and “&lt;&gt;” to indicate “does not equal” but <strong>Teradata will only accept “&lt;&gt;”</strong>. (other operators, like “IN”, “BETWEEN”, and “LIKE” are the same: <a href="http://www.teradatawiki.net/2013/09/Teradata-Operators.html" target="_blank" rel="noopener">http://www.teradatawiki.net/2013/09/Teradata-Operators.html</a>)</p>
+</li>
+</ul>
+<h4 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h4><h5 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a><code>GROUP BY</code></h5><blockquote>
+<p>The syntax for standard aggregate functions, <code>HAVING</code> clauses, and <code>joins</code> is the same in Teradata as it is in MySQL.</p>
+</blockquote>
+<p><code>GROUP BY</code> clauses in Teradata differ form GROUP BY clauses in MySQL.</p>
+<p>In Teradata (and many other database systems): <strong>Any non-aggregated column in the <code>SELECT</code> list or <code>HAVING</code> list of a query with a <code>GROUP BY</code> clause must also listed in the <code>GROUP BY</code> clause.</strong></p>
+<p>Make sure any non-aggregate column in your SELECT list is also listed in your GROUP BY clause.</p>
+
       
     </div>
 
@@ -390,7 +406,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/AngularJS/" rel="tag"># AngularJS</a>
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+            <a href="/tags/Teradta/" rel="tag"># Teradta</a>
           
         </div>
       
@@ -403,8 +421,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/02/angularJS部件/" rel="next" title="AngularJS1.x 部件">
-                <i class="fa fa-chevron-left"></i> AngularJS1.x 部件
+              <a href="/2017/10/02/7.2SQL笔记2/" rel="next" title="Coursera_Managing Big Data with MySQL_Note 2">
+                <i class="fa fa-chevron-left"></i> Coursera_Managing Big Data with MySQL_Note 2
               </a>
             
           </div>
@@ -413,8 +431,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/21/6.1ML笔记_Week1/" rel="prev" title="Coursera Ng Adrew Machine Learning_Note week1">
-                Coursera Ng Adrew Machine Learning_Note week1 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/04/7.3SQL笔记3/" rel="prev" title="Coursera_Managing Big Data with MySQL_Note 3">
+                Coursera_Managing Big Data with MySQL_Note 3 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,7 +551,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Angular-JS-模块的概念和依赖注入分析"><span class="nav-number">1.</span> <span class="nav-text">Angular JS 模块的概念和依赖注入分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块概念"><span class="nav-number">2.</span> <span class="nav-text">模块概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖注入"><span class="nav-number">3.</span> <span class="nav-text">依赖注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注入器-injector"><span class="nav-number">3.1.</span> <span class="nav-text">注入器($injector)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制器-controller"><span class="nav-number">3.2.</span> <span class="nav-text">控制器($controller)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Teradata"><span class="nav-number">1.</span> <span class="nav-text">Teradata</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Operator"><span class="nav-number">1.1.</span> <span class="nav-text">Operator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Function"><span class="nav-number">1.2.</span> <span class="nav-text">Function</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Other-important-differences-between-MySQL-and-Teradata"><span class="nav-number">2.</span> <span class="nav-text">The Other important differences between MySQL and Teradata</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1"><span class="nav-number">2.1.</span> <span class="nav-text">1.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2"><span class="nav-number">2.2.</span> <span class="nav-text">2.</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#GROUP-BY"><span class="nav-number">2.2.1.</span> <span class="nav-text">GROUP BY</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
